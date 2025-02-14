@@ -12,9 +12,9 @@ const Index = () => {
   const currentYear = new Date().getFullYear();
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-black via-black/95 to-black/90 text-foreground font-inter">
+    <div className="min-h-screen bg-background text-foreground font-inter">
       {/* Navigation */}
-      <nav className="fixed top-0 w-full backdrop-blur-xl z-50 border-b border-white/5">
+      <nav className="fixed top-0 w-full bg-background/80 backdrop-blur-md z-50 border-b border-white/10">
         <div className="container mx-auto px-4 py-4 flex justify-between items-center">
           <div className="flex items-center space-x-2">
             <Bell className="w-6 h-6 text-primary" />
@@ -24,15 +24,12 @@ const Index = () => {
       </nav>
 
       {/* Hero Section with RainingLetters and CTA */}
-      <div className="relative min-h-[90vh] flex items-center justify-center">
+      <div className="h-[50vh] relative border-b border-white/5">
         <RainingLetters showForm={false} />
-        <div className="absolute inset-0 flex flex-col items-center justify-center px-4 z-10">
-          <h1 className="text-4xl md:text-6xl lg:text-7xl font-bold text-center max-w-4xl leading-tight mb-8 bg-gradient-to-r from-white via-white/90 to-white bg-clip-text text-transparent">
-            Alert is the single most thing we rely on for all Observability.
-          </h1>
+        <div className="absolute bottom-8 left-0 right-0 flex justify-center">
           <button
             onClick={scrollToWaitlist}
-            className="px-8 py-4 bg-primary hover:bg-primary/90 text-white rounded-full font-medium inline-flex items-center gap-2 transition-all hover:scale-105 shadow-lg shadow-primary/20"
+            className="px-8 py-4 bg-primary hover:bg-primary-hover text-white rounded-lg font-medium inline-flex items-center gap-2 transition-all animate-bounce shadow-lg shadow-primary/20"
           >
             Join Waitlist
             <ArrowDown className="w-4 h-4" />
@@ -40,10 +37,26 @@ const Index = () => {
         </div>
       </div>
 
-      {/* Features Grid */}
-      <section className="py-24">
+      {/* Features Section */}
+      <section className="py-24 bg-muted border-b border-white/5">
         <div className="container mx-auto px-4">
-          <div className="grid md:grid-cols-2 gap-6 max-w-6xl mx-auto">
+          <div className="text-center max-w-3xl mx-auto mb-16 space-y-6">
+            <h2 className="text-3xl md:text-4xl font-bold bg-gradient-to-r from-primary via-purple-500 to-primary bg-clip-text text-transparent animate-fade-up leading-tight">
+              Alert is the single most thing we rely on for all Observability.
+            </h2>
+            <div className="space-y-4 animate-fade-up text-muted-foreground" style={{ animationDelay: '200ms' }}>
+              <p className="text-lg md:text-xl leading-relaxed">
+                We hope to ship great software trusting our alerts. But we often respond late, constantly find them bogus, and always end up more than a dozen to solve. We then miss the problems hiding in daylight, and every RCA ends with "one more Alert".
+              </p>
+              <p className="text-lg md:text-xl leading-relaxed">
+                Alerts are boring and our tools to manage alerts have not improved in a decade. Now we believe AI will solve what humans could not. It's a good hope, but hope is not a strategy.
+              </p>
+              <p className="text-lg md:text-xl font-medium text-primary">
+                The Alerts company wants to change this. Same old problem, but modern tools. No promise of AI magic, just smart.
+              </p>
+            </div>
+          </div>
+          <div className="grid md:grid-cols-3 gap-8 max-w-6xl mx-auto">
             {[
               {
                 icon: <Bell className="w-6 h-6" />,
@@ -78,14 +91,14 @@ const Index = () => {
             ].map((feature, index) => (
               <div
                 key={index}
-                className="group p-8 rounded-2xl border border-white/5 backdrop-blur-sm hover:border-primary/30 transition-all duration-300 animate-fade-up hover:bg-white/[0.02]"
+                className="p-8 bg-secondary rounded-xl border border-white/5 hover:border-primary/30 transition-all animate-fade-up hover:shadow-lg hover:shadow-primary/5"
                 style={{ animationDelay: `${index * 100}ms` }}
               >
-                <div className="w-12 h-12 bg-primary/10 rounded-xl flex items-center justify-center mb-6 text-primary group-hover:scale-110 transition-transform">
+                <div className="w-14 h-14 bg-primary/10 rounded-xl flex items-center justify-center mb-6 text-primary">
                   {feature.icon}
                 </div>
-                <h3 className="text-2xl font-semibold mb-4 text-white/90">{feature.title}</h3>
-                <p className="text-lg text-white/60 leading-relaxed">{feature.description}</p>
+                <h3 className="text-2xl font-semibold mb-4">{feature.title}</h3>
+                <p className="text-lg text-muted-foreground leading-relaxed">{feature.description}</p>
               </div>
             ))}
           </div>
@@ -93,10 +106,10 @@ const Index = () => {
       </section>
 
       {/* Metrics Section */}
-      <section className="py-24 border-t border-white/5 backdrop-blur-sm bg-black/20">
+      <section className="py-24 border-b border-white/5">
         <div className="container mx-auto px-4">
-          <h2 className="text-5xl md:text-6xl font-bold text-center mb-20 bg-gradient-to-r from-white via-white/90 to-white bg-clip-text text-transparent">Transform Your Alert Management</h2>
-          <div className="grid md:grid-cols-3 gap-8 max-w-5xl mx-auto">
+          <h2 className="text-4xl md:text-5xl font-bold text-center mb-20 bg-gradient-to-r from-primary to-purple-500 bg-clip-text text-transparent">Transform Your Alert Management</h2>
+          <div className="grid md:grid-cols-3 gap-12 max-w-5xl mx-auto">
             {[
               {
                 metric: "MTTA",
@@ -116,12 +129,12 @@ const Index = () => {
             ].map((metric, index) => (
               <div
                 key={index}
-                className="group p-8 rounded-2xl border border-white/5 text-center animate-fade-up hover:border-primary/30 transition-all duration-300 hover:bg-white/[0.02] backdrop-blur-sm"
+                className="p-8 rounded-xl bg-secondary border border-white/5 text-center animate-fade-up hover:border-primary/30 transition-all"
                 style={{ animationDelay: `${index * 100}ms` }}
               >
-                <div className="text-4xl font-bold text-primary mb-4 group-hover:scale-110 transition-transform">{metric.metric}</div>
-                <h3 className="text-xl font-semibold mb-4 text-white/90">{metric.title}</h3>
-                <p className="text-lg text-white/60 leading-relaxed">{metric.description}</p>
+                <div className="text-4xl font-bold text-primary mb-4">{metric.metric}</div>
+                <h3 className="text-xl font-semibold mb-4">{metric.title}</h3>
+                <p className="text-lg text-muted-foreground leading-relaxed">{metric.description}</p>
               </div>
             ))}
           </div>
@@ -129,18 +142,18 @@ const Index = () => {
       </section>
 
       {/* Waitlist Section */}
-      <section id="waitlist" className="py-24 border-t border-white/5">
+      <section id="waitlist" className="py-24 bg-muted border-b border-white/5">
         <div className="container mx-auto px-4 text-center">
-          <h2 className="text-5xl md:text-6xl font-bold mb-12 bg-gradient-to-r from-white via-white/90 to-white bg-clip-text text-transparent">Ready to Transform Your Alert Management?</h2>
-          <div className="max-w-md mx-auto backdrop-blur-sm p-8 rounded-2xl border border-white/5">
+          <h2 className="text-4xl md:text-5xl font-bold mb-12 bg-gradient-to-r from-primary to-purple-500 bg-clip-text text-transparent">Ready to Transform Your Alert Management?</h2>
+          <div className="max-w-md mx-auto">
             <WaitlistForm />
           </div>
         </div>
       </section>
 
       {/* Footer */}
-      <footer className="py-8 border-t border-white/5">
-        <div className="container mx-auto px-4 text-center text-white/40">
+      <footer className="py-8">
+        <div className="container mx-auto px-4 text-center text-muted-foreground">
           <p>&copy; {currentYear} The Alerts Company. All rights reserved.</p>
         </div>
       </footer>
