@@ -1,6 +1,8 @@
+
 import { Bell, Brain, Zap, Users, Shield, LineChart, ArrowDown } from "lucide-react";
 import RainingLetters from "@/components/RainingLetters";
 import WaitlistForm from "@/components/WaitlistForm";
+import WaitlistData from "@/components/WaitlistData";
 
 const Index = () => {
   const scrollToWaitlist = () => {
@@ -153,6 +155,9 @@ const Index = () => {
           </div>
         </div>
       </section>
+
+      {/* Waitlist Data Section */}
+      <WaitlistData />
 
       {/* Footer */}
       <footer className="py-8">
