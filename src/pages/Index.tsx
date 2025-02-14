@@ -1,3 +1,4 @@
+
 import { Bell, Brain, Zap, Users, Shield, LineChart, ArrowDown } from "lucide-react";
 import RainingLetters from "@/components/RainingLetters";
 import WaitlistForm from "@/components/WaitlistForm";
@@ -21,7 +22,7 @@ const Index = () => {
       </nav>
 
       {/* Hero Section with RainingLetters and CTA */}
-      <div className="h-[50vh] relative">
+      <div className="h-[50vh] relative border-b border-white/5">
         <RainingLetters showForm={false} />
         <div className="absolute bottom-8 left-0 right-0 flex justify-center">
           <button
@@ -35,7 +36,7 @@ const Index = () => {
       </div>
 
       {/* Features Section */}
-      <section className="py-20 bg-muted">
+      <section className="py-20 bg-muted border-b border-white/5">
         <div className="container mx-auto px-4">
           <div className="text-center max-w-3xl mx-auto mb-16 animate-fade-up">
             <h2 className="text-3xl font-bold mb-4">Alert is the single most thing we rely on for all Observability.</h2>
@@ -84,7 +85,7 @@ const Index = () => {
             ].map((feature, index) => (
               <div
                 key={index}
-                className="p-6 bg-secondary rounded-xl border border-white/10 hover:border-primary/30 transition-all animate-fade-up"
+                className="p-6 bg-secondary rounded-xl border border-white/5 hover:border-primary/30 transition-all animate-fade-up"
                 style={{ animationDelay: `${index * 100}ms` }}
               >
                 <div className="w-12 h-12 bg-primary/10 rounded-lg flex items-center justify-center mb-4 text-primary">
@@ -99,7 +100,7 @@ const Index = () => {
       </section>
 
       {/* Metrics Section */}
-      <section className="py-20">
+      <section className="py-20 border-b border-white/5">
         <div className="container mx-auto px-4">
           <h2 className="text-3xl font-bold text-center mb-16">Transform Your Alert Management</h2>
           <div className="grid md:grid-cols-3 gap-8 max-w-4xl mx-auto">
@@ -122,7 +123,7 @@ const Index = () => {
             ].map((metric, index) => (
               <div
                 key={index}
-                className="p-6 rounded-xl bg-secondary border border-white/10 text-center animate-fade-up"
+                className="p-6 rounded-xl bg-secondary border border-white/5 text-center animate-fade-up"
                 style={{ animationDelay: `${index * 100}ms` }}
               >
                 <div className="text-2xl font-bold text-primary mb-2">{metric.metric}</div>
@@ -135,7 +136,7 @@ const Index = () => {
       </section>
 
       {/* Waitlist Section */}
-      <section id="waitlist" className="py-20 bg-muted">
+      <section id="waitlist" className="py-20 bg-muted border-b border-white/5">
         <div className="container mx-auto px-4 text-center">
           <h2 className="text-3xl font-bold mb-8">Ready to Transform Your Alert Management?</h2>
           <div className="max-w-md mx-auto">
@@ -145,7 +146,7 @@ const Index = () => {
       </section>
 
       {/* Footer */}
-      <footer className="py-8 border-t border-white/10">
+      <footer className="py-8">
         <div className="container mx-auto px-4 text-center text-muted-foreground">
           <p>&copy; 2024 The Alerts Company. All rights reserved.</p>
         </div>
