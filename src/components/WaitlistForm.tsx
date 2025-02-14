@@ -5,6 +5,7 @@ import { useState } from "react"
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
 import { useToast } from "@/hooks/use-toast"
+import { supabase } from "@/integrations/supabase/client"
 
 const WaitlistForm = () => {
   const [email, setEmail] = useState("")
@@ -15,16 +16,33 @@ const WaitlistForm = () => {
     e.preventDefault()
     setIsLoading(true)
 
-    // Simulate API call
-    await new Promise((resolve) => setTimeout(resolve, 1000))
+    try {
+      const { error } = await supabase
+        .from('waitlist')
+        .insert([{ email }])
 
-    toast({
-      title: "Successfully joined waitlist!",
-      description: "We'll notify you when we launch.",
-    })
+      if (error) {
+        if (error.code === '23505') { // Unique violation error code
+          throw new Error('This email is already on the waitlist!')
+        }
+        throw error
+      }
 
-    setEmail("")
-    setIsLoading(false)
+      toast({
+        title: "Successfully joined waitlist!",
+        description: "We'll notify you when we launch.",
+      })
+
+      setEmail("")
+    } catch (error: any) {
+      toast({
+        title: "Error joining waitlist",
+        description: error.message,
+        variant: "destructive",
+      })
+    } finally {
+      setIsLoading(false)
+    }
   }
 
   return (
