@@ -44,8 +44,8 @@ const ScrambledTitle = () => {
   return (
     <h1
       ref={elementRef}
-      className="text-white text-6xl font-bold tracking-wider text-center"
-      style={{ fontFamily: "monospace" }}
+      className="text-white font-bold tracking-wider text-center px-4 text-3xl sm:text-4xl md:text-5xl lg:text-6xl break-words"
+      style={{ fontFamily: "monospace", maxWidth: "100vw", wordWrap: "break-word" }}
     >
       The Alerts Company
     </h1>
