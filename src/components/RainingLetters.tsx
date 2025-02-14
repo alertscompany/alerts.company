@@ -1,3 +1,4 @@
+
 "use client"
 
 import { useState, useEffect, useCallback } from "react"
@@ -103,7 +104,9 @@ const RainingLetters = ({ showForm = true }: RainingLettersProps) => {
             opacity: activeIndices.has(index) ? 1 : 0.4,
             transition: "color 0.1s, transform 0.1s, text-shadow 0.1s",
             willChange: "transform, top",
-            fontSize: "1.8rem",
+            fontSize: activeIndices.has(index)
+              ? "clamp(1rem, 4vw, 1.8rem)"
+              : "clamp(0.75rem, 3vw, 1.5rem)",
           }}
         >
           {char.char}
@@ -123,3 +126,4 @@ const RainingLetters = ({ showForm = true }: RainingLettersProps) => {
 }
 
 export default RainingLetters
+
