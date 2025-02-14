@@ -9,27 +9,6 @@ export type Json =
 export type Database = {
   public: {
     Tables: {
-      profiles: {
-        Row: {
-          created_at: string
-          id: string
-          is_admin: boolean | null
-          updated_at: string
-        }
-        Insert: {
-          created_at?: string
-          id: string
-          is_admin?: boolean | null
-          updated_at?: string
-        }
-        Update: {
-          created_at?: string
-          id?: string
-          is_admin?: boolean | null
-          updated_at?: string
-        }
-        Relationships: []
-      }
       waitlist: {
         Row: {
           created_at: string
