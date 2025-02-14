@@ -12,7 +12,7 @@ const Index = () => {
   const currentYear = new Date().getFullYear();
 
   return (
-    <div className="min-h-screen bg-background text-foreground font-inter">
+    <div className="min-h-screen bg-background text-foreground font-plus-jakarta">
       {/* Navigation */}
       <nav className="fixed top-0 w-full bg-background/80 backdrop-blur-md z-50 border-b border-white/10">
         <div className="container mx-auto px-4 py-4 flex justify-between items-center">
@@ -162,3 +162,4 @@ const Index = () => {
 };
 
 export default Index;
+

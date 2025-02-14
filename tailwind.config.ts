@@ -68,9 +68,11 @@ export default {
         "fade-up": "fade-up 0.5s ease-out",
       },
       fontFamily: {
-        inter: ["Inter", "sans-serif"],
+        inter: ['Inter', 'sans-serif'],
+        'plus-jakarta': ['Plus Jakarta Sans', 'sans-serif'],
       },
     },
   },
   plugins: [require("tailwindcss-animate")],
 } satisfies Config;
+
