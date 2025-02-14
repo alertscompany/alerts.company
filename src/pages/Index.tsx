@@ -9,6 +9,8 @@ const Index = () => {
     waitlistElement?.scrollIntoView({ behavior: 'smooth' });
   };
 
+  const currentYear = new Date().getFullYear();
+
   return (
     <div className="min-h-screen bg-background text-foreground">
       {/* Navigation */}
@@ -148,7 +150,7 @@ const Index = () => {
       {/* Footer */}
       <footer className="py-8">
         <div className="container mx-auto px-4 text-center text-muted-foreground">
-          <p>&copy; 2024 The Alerts Company. All rights reserved.</p>
+          <p>&copy; {currentYear} The Alerts Company. All rights reserved.</p>
         </div>
       </footer>
     </div>
