@@ -22,9 +22,15 @@ const Index = () => {
       <section className="py-20 bg-muted">
         <div className="container mx-auto px-4">
           <div className="text-center max-w-3xl mx-auto mb-16 animate-fade-up">
-            <h2 className="text-3xl font-bold mb-4">Powerful Features</h2>
+            <h2 className="text-3xl font-bold mb-4">Alert is the single most thing we rely on for all Observability.</h2>
             <p className="text-muted-foreground">
-              Built with modern teams in mind, our platform helps you stay on top of what matters.
+              We hope to ship great software trusting our alerts. But we often respond late, constantly find them bogus, and always end up more than a dozen to solve. We then miss the problems hiding in daylight, and every RCA ends with "one more Alert".
+            </p>
+            <p className="text-muted-foreground mt-4">
+              Alerts are boring and our tools to manage alerts have not improved in a decade. Now we believe AI will solve what humans could not. It's a good hope, but hope is not a strategy.
+            </p>
+            <p className="text-muted-foreground mt-4">
+              The Alerts company wants to change this. Same old problem, but modern tools. No promise of AI magic, just smart.
             </p>
           </div>
           <div className="grid md:grid-cols-3 gap-8 max-w-5xl mx-auto">
