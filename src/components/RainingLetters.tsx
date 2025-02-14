@@ -1,4 +1,3 @@
-
 "use client"
 
 import { useState, useEffect, useCallback, useRef } from "react"
@@ -271,12 +270,14 @@ const RainingLetters: React.FC = () => {
         </span>
       ))}
 
-      <style jsx global>{`
-        .dud {
-          color: #0EA5E9;
-          opacity: 0.7;
-        }
-      `}</style>
+      <style>
+        {`
+          .dud {
+            color: #0EA5E9;
+            opacity: 0.7;
+          }
+        `}
+      </style>
     </div>
   )
 }

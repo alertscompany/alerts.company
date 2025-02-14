@@ -1,4 +1,5 @@
-import { Bell } from "lucide-react";
+
+import { Bell, Brain, Zap, Users, Shield, LineChart } from "lucide-react";
 import RainingLetters from "@/components/RainingLetters";
 
 const Index = () => {
