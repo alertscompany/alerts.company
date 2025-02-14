@@ -40,18 +40,18 @@ const Index = () => {
       {/* Features Section */}
       <section className="py-24 bg-muted border-b border-white/5">
         <div className="container mx-auto px-4">
-          <div className="text-center max-w-4xl mx-auto mb-20 space-y-8">
-            <h2 className="text-4xl md:text-6xl font-bold bg-gradient-to-r from-primary via-purple-500 to-primary bg-clip-text text-transparent animate-fade-up tracking-tight">
+          <div className="text-center max-w-3xl mx-auto mb-16 space-y-6">
+            <h2 className="text-3xl md:text-4xl font-bold bg-gradient-to-r from-primary via-purple-500 to-primary bg-clip-text text-transparent animate-fade-up leading-tight">
               Alert is the single most thing we rely on for all Observability.
             </h2>
-            <div className="space-y-8 animate-fade-up" style={{ animationDelay: '200ms' }}>
-              <p className="text-xl md:text-2xl text-muted-foreground leading-relaxed">
+            <div className="space-y-4 animate-fade-up text-muted-foreground" style={{ animationDelay: '200ms' }}>
+              <p className="text-lg md:text-xl leading-relaxed">
                 We hope to ship great software trusting our alerts. But we often respond late, constantly find them bogus, and always end up more than a dozen to solve. We then miss the problems hiding in daylight, and every RCA ends with "one more Alert".
               </p>
-              <p className="text-xl md:text-2xl text-muted-foreground leading-relaxed">
+              <p className="text-lg md:text-xl leading-relaxed">
                 Alerts are boring and our tools to manage alerts have not improved in a decade. Now we believe AI will solve what humans could not. It's a good hope, but hope is not a strategy.
               </p>
-              <p className="text-xl md:text-2xl font-semibold text-primary">
+              <p className="text-lg md:text-xl font-medium text-primary">
                 The Alerts company wants to change this. Same old problem, but modern tools. No promise of AI magic, just smart.
               </p>
             </div>
