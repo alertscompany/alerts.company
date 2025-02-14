@@ -1,9 +1,7 @@
-
 "use client"
 
 import { useState, useEffect, useCallback } from "react"
 import ScrambledTitle from "./ScrambledTitle"
-import WaitlistForm from "./WaitlistForm"
 
 interface Character {
   char: string
@@ -12,7 +10,11 @@ interface Character {
   speed: number
 }
 
-const RainingLetters = () => {
+interface RainingLettersProps {
+  showForm?: boolean
+}
+
+const RainingLetters = ({ showForm = true }: RainingLettersProps) => {
   const [characters, setCharacters] = useState<Character[]>([])
   const [activeIndices, setActiveIndices] = useState<Set<number>>(new Set())
 
@@ -76,15 +78,10 @@ const RainingLetters = () => {
   }, [])
 
   return (
-    <div className="relative min-h-[calc(100vh-4rem)] bg-background overflow-hidden">
+    <div className="relative h-full bg-background overflow-hidden">
       {/* Title */}
       <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 z-20 w-full px-4">
         <ScrambledTitle />
-      </div>
-
-      {/* Waitlist Form */}
-      <div className="absolute bottom-20 left-1/2 transform -translate-x-1/2 z-20 w-full max-w-md px-4">
-        <WaitlistForm />
       </div>
 
       {/* Raining Characters */}
@@ -126,4 +123,3 @@ const RainingLetters = () => {
 }
 
 export default RainingLetters
-

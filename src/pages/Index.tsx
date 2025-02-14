@@ -1,8 +1,13 @@
-
-import { Bell, Brain, Zap, Users, Shield, LineChart } from "lucide-react";
+import { Bell, Brain, Zap, Users, Shield, LineChart, ArrowDown } from "lucide-react";
 import RainingLetters from "@/components/RainingLetters";
+import WaitlistForm from "@/components/WaitlistForm";
 
 const Index = () => {
+  const scrollToWaitlist = () => {
+    const waitlistElement = document.getElementById('waitlist');
+    waitlistElement?.scrollIntoView({ behavior: 'smooth' });
+  };
+
   return (
     <div className="min-h-screen bg-background text-foreground">
       {/* Navigation */}
@@ -15,8 +20,19 @@ const Index = () => {
         </div>
       </nav>
 
-      {/* Hero Section with RainingLetters */}
-      <RainingLetters />
+      {/* Hero Section with RainingLetters and CTA */}
+      <div className="h-[50vh] relative">
+        <RainingLetters showForm={false} />
+        <div className="absolute bottom-8 left-0 right-0 flex justify-center">
+          <button
+            onClick={scrollToWaitlist}
+            className="px-8 py-4 bg-primary hover:bg-primary-hover text-white rounded-lg font-medium inline-flex items-center gap-2 transition-all animate-bounce"
+          >
+            Join Waitlist
+            <ArrowDown className="w-4 h-4" />
+          </button>
+        </div>
+      </div>
 
       {/* Features Section */}
       <section className="py-20 bg-muted">
@@ -118,17 +134,13 @@ const Index = () => {
         </div>
       </section>
 
-      {/* CTA Section */}
-      <section className="py-20 bg-muted">
+      {/* Waitlist Section */}
+      <section id="waitlist" className="py-20 bg-muted">
         <div className="container mx-auto px-4 text-center">
           <h2 className="text-3xl font-bold mb-8">Ready to Transform Your Alert Management?</h2>
-          <button
-            onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })}
-            className="px-8 py-4 bg-primary hover:bg-primary-hover text-white rounded-lg font-medium inline-flex items-center justify-center gap-2 transition-all"
-          >
-            Get Started
-            {/* <ArrowRight className="w-4 h-4" /> */}
-          </button>
+          <div className="max-w-md mx-auto">
+            <WaitlistForm />
+          </div>
         </div>
       </section>
 
