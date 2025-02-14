@@ -21,10 +21,9 @@ const ScrambledTitle = () => {
       const phrases = [
         "The Alerts Company",
         "Superhuman for Alerts",
-        "Transform Your Inbox",
-        "Streamline Your Workflow",
-        "Intelligent Alert Management",
-        "Join Our Waitlist Today",
+        "Transform Your Alerts",
+        "Streamline Your Alerts",
+        "Smart Alerts management",
       ]
 
       let counter = 0
