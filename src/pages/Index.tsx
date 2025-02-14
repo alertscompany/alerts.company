@@ -1,4 +1,3 @@
-
 import { Bell, Brain, Zap, Users, Shield, LineChart, ArrowDown } from "lucide-react";
 import RainingLetters from "@/components/RainingLetters";
 import WaitlistForm from "@/components/WaitlistForm";
@@ -41,7 +40,7 @@ const Index = () => {
       <section className="py-24 bg-muted border-b border-white/5">
         <div className="container mx-auto px-4">
           <div className="text-center max-w-3xl mx-auto mb-16 space-y-6">
-            <h2 className="text-3xl md:text-4xl font-bold bg-gradient-to-r from-primary via-purple-500 to-primary bg-clip-text text-transparent animate-fade-up leading-tight">
+            <h2 className="text-3xl md:text-4xl font-bold bg-gradient-to-r from-primary via-purple-500 to-primary bg-clip-text text-transparent animate-fade-up leading-relaxed pb-1">
               Alert is the single most thing we rely on for all Observability.
             </h2>
             <div className="mx-auto max-w-[65ch] text-center leading-7 text-[#D9DCD6] md:text-xl mb-10 md:mb-20 space-y-8">
@@ -108,7 +107,9 @@ const Index = () => {
       {/* Metrics Section */}
       <section className="py-24 border-b border-white/5">
         <div className="container mx-auto px-4">
-          <h2 className="text-4xl md:text-5xl font-bold text-center mb-20 bg-gradient-to-r from-primary to-purple-500 bg-clip-text text-transparent">Transform Your Alert Management</h2>
+          <h2 className="text-4xl md:text-5xl font-bold text-center mb-20 bg-gradient-to-r from-primary to-purple-500 bg-clip-text text-transparent leading-relaxed pb-1">
+            Transform Your Alert Management
+          </h2>
           <div className="grid md:grid-cols-3 gap-12 max-w-5xl mx-auto">
             {[
               {
@@ -144,7 +145,9 @@ const Index = () => {
       {/* Waitlist Section */}
       <section id="waitlist" className="py-24 bg-muted border-b border-white/5">
         <div className="container mx-auto px-4 text-center">
-          <h2 className="text-4xl md:text-5xl font-bold mb-12 bg-gradient-to-r from-primary to-purple-500 bg-clip-text text-transparent">Ready to Transform Your Alert Management?</h2>
+          <h2 className="text-4xl md:text-5xl font-bold mb-12 bg-gradient-to-r from-primary to-purple-500 bg-clip-text text-transparent leading-relaxed pb-1">
+            Ready to Transform Your Alert Management?
+          </h2>
           <div className="max-w-md mx-auto">
             <WaitlistForm />
           </div>
