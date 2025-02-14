@@ -1,3 +1,4 @@
+
 import { Bell, Brain, Zap, Users, Shield, LineChart, ArrowDown } from "lucide-react";
 import RainingLetters from "@/components/RainingLetters";
 import WaitlistForm from "@/components/WaitlistForm";
@@ -11,7 +12,7 @@ const Index = () => {
   const currentYear = new Date().getFullYear();
 
   return (
-    <div className="min-h-screen bg-background text-foreground">
+    <div className="min-h-screen bg-background text-foreground font-inter">
       {/* Navigation */}
       <nav className="fixed top-0 w-full bg-background/80 backdrop-blur-md z-50 border-b border-white/10">
         <div className="container mx-auto px-4 py-4 flex justify-between items-center">
@@ -28,7 +29,7 @@ const Index = () => {
         <div className="absolute bottom-8 left-0 right-0 flex justify-center">
           <button
             onClick={scrollToWaitlist}
-            className="px-8 py-4 bg-primary hover:bg-primary-hover text-white rounded-lg font-medium inline-flex items-center gap-2 transition-all animate-bounce"
+            className="px-8 py-4 bg-primary hover:bg-primary-hover text-white rounded-lg font-medium inline-flex items-center gap-2 transition-all animate-bounce shadow-lg shadow-primary/20"
           >
             Join Waitlist
             <ArrowDown className="w-4 h-4" />
@@ -37,25 +38,25 @@ const Index = () => {
       </div>
 
       {/* Features Section */}
-      <section className="py-20 bg-muted border-b border-white/5">
+      <section className="py-24 bg-muted border-b border-white/5">
         <div className="container mx-auto px-4">
-          <div className="text-center max-w-3xl mx-auto mb-16 space-y-8">
-            <h2 className="text-4xl md:text-5xl font-bold mb-4 bg-gradient-to-r from-primary via-purple-500 to-primary bg-clip-text text-transparent animate-fade-up">
+          <div className="text-center max-w-4xl mx-auto mb-20 space-y-8">
+            <h2 className="text-4xl md:text-6xl font-bold bg-gradient-to-r from-primary via-purple-500 to-primary bg-clip-text text-transparent animate-fade-up tracking-tight">
               Alert is the single most thing we rely on for all Observability.
             </h2>
-            <div className="space-y-6 animate-fade-up" style={{ animationDelay: '200ms' }}>
-              <p className="text-xl text-muted-foreground leading-relaxed">
+            <div className="space-y-8 animate-fade-up" style={{ animationDelay: '200ms' }}>
+              <p className="text-xl md:text-2xl text-muted-foreground leading-relaxed">
                 We hope to ship great software trusting our alerts. But we often respond late, constantly find them bogus, and always end up more than a dozen to solve. We then miss the problems hiding in daylight, and every RCA ends with "one more Alert".
               </p>
-              <p className="text-xl text-muted-foreground leading-relaxed">
+              <p className="text-xl md:text-2xl text-muted-foreground leading-relaxed">
                 Alerts are boring and our tools to manage alerts have not improved in a decade. Now we believe AI will solve what humans could not. It's a good hope, but hope is not a strategy.
               </p>
-              <p className="text-xl font-semibold text-primary">
+              <p className="text-xl md:text-2xl font-semibold text-primary">
                 The Alerts company wants to change this. Same old problem, but modern tools. No promise of AI magic, just smart.
               </p>
             </div>
           </div>
-          <div className="grid md:grid-cols-3 gap-8 max-w-5xl mx-auto">
+          <div className="grid md:grid-cols-3 gap-8 max-w-6xl mx-auto">
             {[
               {
                 icon: <Bell className="w-6 h-6" />,
@@ -90,14 +91,14 @@ const Index = () => {
             ].map((feature, index) => (
               <div
                 key={index}
-                className="p-6 bg-secondary rounded-xl border border-white/5 hover:border-primary/30 transition-all animate-fade-up"
+                className="p-8 bg-secondary rounded-xl border border-white/5 hover:border-primary/30 transition-all animate-fade-up hover:shadow-lg hover:shadow-primary/5"
                 style={{ animationDelay: `${index * 100}ms` }}
               >
-                <div className="w-12 h-12 bg-primary/10 rounded-lg flex items-center justify-center mb-4 text-primary">
+                <div className="w-14 h-14 bg-primary/10 rounded-xl flex items-center justify-center mb-6 text-primary">
                   {feature.icon}
                 </div>
-                <h3 className="text-xl font-semibold mb-2">{feature.title}</h3>
-                <p className="text-muted-foreground">{feature.description}</p>
+                <h3 className="text-2xl font-semibold mb-4">{feature.title}</h3>
+                <p className="text-lg text-muted-foreground leading-relaxed">{feature.description}</p>
               </div>
             ))}
           </div>
@@ -105,10 +106,10 @@ const Index = () => {
       </section>
 
       {/* Metrics Section */}
-      <section className="py-20 border-b border-white/5">
+      <section className="py-24 border-b border-white/5">
         <div className="container mx-auto px-4">
-          <h2 className="text-3xl font-bold text-center mb-16">Transform Your Alert Management</h2>
-          <div className="grid md:grid-cols-3 gap-8 max-w-4xl mx-auto">
+          <h2 className="text-4xl md:text-5xl font-bold text-center mb-20 bg-gradient-to-r from-primary to-purple-500 bg-clip-text text-transparent">Transform Your Alert Management</h2>
+          <div className="grid md:grid-cols-3 gap-12 max-w-5xl mx-auto">
             {[
               {
                 metric: "MTTA",
@@ -128,12 +129,12 @@ const Index = () => {
             ].map((metric, index) => (
               <div
                 key={index}
-                className="p-6 rounded-xl bg-secondary border border-white/5 text-center animate-fade-up"
+                className="p-8 rounded-xl bg-secondary border border-white/5 text-center animate-fade-up hover:border-primary/30 transition-all"
                 style={{ animationDelay: `${index * 100}ms` }}
               >
-                <div className="text-2xl font-bold text-primary mb-2">{metric.metric}</div>
-                <h3 className="text-lg font-semibold mb-2">{metric.title}</h3>
-                <p className="text-muted-foreground">{metric.description}</p>
+                <div className="text-4xl font-bold text-primary mb-4">{metric.metric}</div>
+                <h3 className="text-xl font-semibold mb-4">{metric.title}</h3>
+                <p className="text-lg text-muted-foreground leading-relaxed">{metric.description}</p>
               </div>
             ))}
           </div>
@@ -141,9 +142,9 @@ const Index = () => {
       </section>
 
       {/* Waitlist Section */}
-      <section id="waitlist" className="py-20 bg-muted border-b border-white/5">
+      <section id="waitlist" className="py-24 bg-muted border-b border-white/5">
         <div className="container mx-auto px-4 text-center">
-          <h2 className="text-3xl font-bold mb-8">Ready to Transform Your Alert Management?</h2>
+          <h2 className="text-4xl md:text-5xl font-bold mb-12 bg-gradient-to-r from-primary to-purple-500 bg-clip-text text-transparent">Ready to Transform Your Alert Management?</h2>
           <div className="max-w-md mx-auto">
             <WaitlistForm />
           </div>

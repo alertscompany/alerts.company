@@ -68,7 +68,7 @@ export default {
         "fade-up": "fade-up 0.5s ease-out",
       },
       fontFamily: {
-        sans: ["Inter", "sans-serif"],
+        inter: ["Inter", "sans-serif"],
       },
     },
   },
