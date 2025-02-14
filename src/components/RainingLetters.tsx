@@ -76,7 +76,7 @@ const RainingLetters = () => {
   }, [])
 
   return (
-    <div className="relative min-h-[calc(100vh-4rem)] bg-black overflow-hidden">
+    <div className="relative min-h-[calc(100vh-4rem)] bg-background overflow-hidden">
       {/* Title */}
       <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 z-20 w-full px-4">
         <ScrambledTitle />
@@ -126,3 +126,4 @@ const RainingLetters = () => {
 }
 
 export default RainingLetters
+
