@@ -1,3 +1,4 @@
+
 import { Bell, Brain, Zap, Users, Shield, LineChart, ArrowDown } from "lucide-react";
 import RainingLetters from "@/components/RainingLetters";
 import WaitlistForm from "@/components/WaitlistForm";
@@ -25,7 +26,7 @@ const Index = () => {
       {/* Hero Section with RainingLetters and CTA */}
       <div className="h-[50vh] relative border-b border-white/5">
         <RainingLetters showForm={false} />
-        <div className="absolute bottom-8 left-0 right-0 flex justify-center">
+        <div className="absolute bottom-8 left-0 right-0 flex justify-center z-30">
           <button
             onClick={scrollToWaitlist}
             className="px-8 py-4 bg-primary hover:bg-primary-hover text-white rounded-lg font-medium inline-flex items-center gap-2 transition-all animate-bounce shadow-lg shadow-primary/20"
