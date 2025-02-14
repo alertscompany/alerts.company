@@ -25,6 +25,9 @@ const WaitlistForm = () => {
         if (error.code === '23505') { // Unique violation error code
           throw new Error('This email is already on the waitlist!')
         }
+        if (error.code === 'PGRST116') { // Policy violation error code
+          throw new Error('Too many signup attempts. Please try again later.')
+        }
         throw error
       }
 
