@@ -1,4 +1,3 @@
-
 import { Bell, Brain, Zap, Users, Shield, LineChart, ArrowDown } from "lucide-react";
 import RainingLetters from "@/components/RainingLetters";
 import WaitlistForm from "@/components/WaitlistForm";
@@ -44,11 +43,11 @@ const Index = () => {
             <h2 className="text-3xl md:text-4xl font-bold bg-gradient-to-r from-primary via-purple-500 to-primary bg-clip-text text-transparent animate-fade-up leading-tight">
               Alert is the single most thing we rely on for all Observability.
             </h2>
-            <div className="space-y-4 animate-fade-up text-muted-foreground" style={{ animationDelay: '200ms' }}>
-              <p className="text-lg md:text-xl leading-relaxed">
+            <div className="mx-auto max-w-[65ch] text-center leading-7 text-[#D9DCD6] md:text-xl mb-10 md:mb-20">
+              <p>
                 We hope to ship great software trusting our alerts. But we often respond late, constantly find them bogus, and always end up more than a dozen to solve. We then miss the problems hiding in daylight, and every RCA ends with "one more Alert".
               </p>
-              <p className="text-lg md:text-xl leading-relaxed">
+              <p>
                 Alerts are boring and our tools to manage alerts have not improved in a decade. Now we believe AI will solve what humans could not. It's a good hope, but hope is not a strategy.
               </p>
               <p className="text-lg md:text-xl font-medium text-primary">
@@ -162,4 +161,3 @@ const Index = () => {
 };
 
 export default Index;
-
