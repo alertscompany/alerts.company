@@ -1,3 +1,4 @@
+
 "use client"
 
 import { useState, useEffect, useCallback } from "react"
@@ -27,7 +28,7 @@ const RainingLetters = ({ showForm = true }: RainingLettersProps) => {
       newCharacters.push({
         char: allChars[Math.floor(Math.random() * allChars.length)],
         x: Math.random() * 100,
-        y: Math.random() * 100,
+        y: Math.random() * 80, // Reduced from 100 to 80 to leave space for the button
         speed: 0.1 + Math.random() * 0.3,
       })
     }
@@ -61,7 +62,8 @@ const RainingLetters = ({ showForm = true }: RainingLettersProps) => {
         prevChars.map((char) => ({
           ...char,
           y: char.y + char.speed,
-          ...(char.y >= 100 && {
+          // Reset position when character reaches 80% of container height
+          ...(char.y >= 80 && {
             y: -5,
             x: Math.random() * 100,
             char: "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789!@#$%^&*()_+-=[]{}|;:,.<>?"[
@@ -85,30 +87,32 @@ const RainingLetters = ({ showForm = true }: RainingLettersProps) => {
       </div>
 
       {/* Raining Characters */}
-      {characters.map((char, index) => (
-        <span
-          key={index}
-          className={`absolute text-xs transition-colors duration-100 ${
-            activeIndices.has(index)
-              ? "text-primary text-base scale-125 z-10 font-bold animate-pulse"
-              : "text-slate-600 font-light"
-          }`}
-          style={{
-            left: `${char.x}%`,
-            top: `${char.y}%`,
-            transform: `translate(-50%, -50%) ${activeIndices.has(index) ? "scale(1.25)" : "scale(1)"}`,
-            textShadow: activeIndices.has(index)
-              ? "0 0 8px rgba(255,255,255,0.8), 0 0 12px rgba(255,255,255,0.4)"
-              : "none",
-            opacity: activeIndices.has(index) ? 1 : 0.4,
-            transition: "color 0.1s, transform 0.1s, text-shadow 0.1s",
-            willChange: "transform, top",
-            fontSize: "1.8rem",
-          }}
-        >
-          {char.char}
-        </span>
-      ))}
+      <div className="absolute inset-0 h-[80%]"> {/* Container to constrain letters */}
+        {characters.map((char, index) => (
+          <span
+            key={index}
+            className={`absolute text-xs transition-colors duration-100 ${
+              activeIndices.has(index)
+                ? "text-primary text-base scale-125 z-10 font-bold animate-pulse"
+                : "text-slate-600 font-light"
+            }`}
+            style={{
+              left: `${char.x}%`,
+              top: `${char.y}%`,
+              transform: `translate(-50%, -50%) ${activeIndices.has(index) ? "scale(1.25)" : "scale(1)"}`,
+              textShadow: activeIndices.has(index)
+                ? "0 0 8px rgba(255,255,255,0.8), 0 0 12px rgba(255,255,255,0.4)"
+                : "none",
+              opacity: activeIndices.has(index) ? 1 : 0.4,
+              transition: "color 0.1s, transform 0.1s, text-shadow 0.1s",
+              willChange: "transform, top",
+              fontSize: "1.8rem",
+            }}
+          >
+            {char.char}
+          </span>
+        ))}
+      </div>
 
       <style>
         {`
