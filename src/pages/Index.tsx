@@ -46,7 +46,7 @@ const Index = () => {
             </h2>
             <div className="mx-auto max-w-[65ch] text-center leading-7 text-[#D9DCD6] md:text-xl mb-10 md:mb-20 space-y-8">
               <p>
-                We hope to ship great software trusting our alerts. But we often respond late, constantly find them bogus, and always end up more than a dozen to solve. We then miss the problems hiding in daylight, and every RCA ends with "one more Alert".
+                We hope to ship great software trusting our alerts. But we often respond late, constantly find them bogus, and always end up with more than a dozen to solve. We then miss the problems hiding in daylight, and every RCA ends with "one more Alert".
               </p>
               <p>
                 Alerts are boring and our tools to manage alerts have not improved in a decade. Now we believe AI will solve what humans could not. It's a good hope, but hope is not a strategy.
