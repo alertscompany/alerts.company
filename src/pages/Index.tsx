@@ -1,3 +1,4 @@
+
 import { Bell, Brain, Zap, Users, Shield, LineChart, ArrowDown } from "lucide-react";
 import RainingLetters from "@/components/RainingLetters";
 import WaitlistForm from "@/components/WaitlistForm";
@@ -69,8 +70,8 @@ const Index = () => {
               },
               {
                 icon: <Zap className="w-6 h-6" />,
-                title: "Intelligent Decisioning",
-                description: "Leverage AI-powered insights combined with your company's unique context and past resolutions.",
+                title: "Better Decisioning",
+                description: "Leverage industry insights combined with your company's unique context, and past resolutions.",
               },
               {
                 icon: <Users className="w-6 h-6" />,
