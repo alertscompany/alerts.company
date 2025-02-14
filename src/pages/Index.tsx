@@ -116,7 +116,7 @@ const Index = () => {
               {
                 metric: "MTTA",
                 title: "Improved Mean Time to Acknowledge",
-                description: "Reduce response times with smart prioritization",
+                description: "Send us your alerts and watch MTTA, MTBI, and MDT improve. Focus on alert resolution while we handle everything else.",
               },
               {
                 metric: "MTBI",
