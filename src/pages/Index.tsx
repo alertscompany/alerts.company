@@ -1,29 +1,7 @@
-
-import { useState } from "react";
-import { Bell, ArrowRight, Check, Shield, Zap, Users, LineChart, Brain } from "lucide-react";
-import { useToast } from "@/hooks/use-toast";
+import { Bell } from "lucide-react";
+import RainingLetters from "@/components/RainingLetters";
 
 const Index = () => {
-  const [email, setEmail] = useState("");
-  const [isLoading, setIsLoading] = useState(false);
-  const { toast } = useToast();
-
-  const handleSubmit = async (e: React.FormEvent) => {
-    e.preventDefault();
-    setIsLoading(true);
-
-    // Simulate API call
-    await new Promise((resolve) => setTimeout(resolve, 1000));
-
-    toast({
-      title: "Successfully joined waitlist!",
-      description: "We'll notify you when we launch.",
-    });
-
-    setEmail("");
-    setIsLoading(false);
-  };
-
   return (
     <div className="min-h-screen bg-background text-foreground">
       {/* Navigation */}
@@ -36,58 +14,8 @@ const Index = () => {
         </div>
       </nav>
 
-      {/* Hero Section */}
-      <section className="pt-32 pb-20 px-4">
-        <div className="container mx-auto max-w-6xl">
-          <div className="grid lg:grid-cols-2 gap-12 items-center">
-            <div className="space-y-8 animate-fade-up">
-              <div>
-                <span className="px-4 py-2 rounded-full bg-primary/10 text-primary text-sm font-medium">
-                  Superhuman for Alerts
-                </span>
-              </div>
-              <h1 className="text-4xl sm:text-5xl lg:text-6xl font-bold leading-tight">
-                Transform your alert inbox
-              </h1>
-              <p className="text-lg text-muted-foreground">
-                Transform your alert inbox from a source of stress into a streamlined system of action. Do, Defer, Delete, or Delegate with confidence.
-              </p>
-              <form onSubmit={handleSubmit} className="flex flex-col sm:flex-row gap-4 max-w-md">
-                <input
-                  type="email"
-                  value={email}
-                  onChange={(e) => setEmail(e.target.value)}
-                  placeholder="Enter your email"
-                  required
-                  className="flex-1 px-4 py-3 rounded-lg bg-secondary border border-white/10 focus:outline-none focus:ring-2 focus:ring-primary/20 focus:border-primary transition-all text-white"
-                />
-                <button
-                  type="submit"
-                  disabled={isLoading}
-                  className="px-6 py-3 bg-primary hover:bg-primary-hover text-white rounded-lg font-medium flex items-center justify-center gap-2 transition-all disabled:opacity-70"
-                >
-                  {isLoading ? (
-                    "Joining..."
-                  ) : (
-                    <>
-                      Get Started
-                      <ArrowRight className="w-4 h-4" />
-                    </>
-                  )}
-                </button>
-              </form>
-            </div>
-            <div className="relative animate-float hidden lg:block">
-              <div className="absolute inset-0 bg-gradient-to-r from-primary/20 to-accent/20 rounded-3xl blur-3xl -z-10" />
-              <img
-                src="https://images.unsplash.com/photo-1486312338219-ce68d2c6f44d"
-                alt="Person using laptop"
-                className="rounded-3xl shadow-2xl opacity-80"
-              />
-            </div>
-          </div>
-        </div>
-      </section>
+      {/* Hero Section with RainingLetters */}
+      <RainingLetters />
 
       {/* Features Section */}
       <section className="py-20 bg-muted">
@@ -192,7 +120,7 @@ const Index = () => {
             className="px-8 py-4 bg-primary hover:bg-primary-hover text-white rounded-lg font-medium inline-flex items-center justify-center gap-2 transition-all"
           >
             Get Started
-            <ArrowRight className="w-4 h-4" />
+            {/* <ArrowRight className="w-4 h-4" /> */}
           </button>
         </div>
       </section>
