@@ -1,4 +1,3 @@
-
 import { Bell, Brain, Zap, Users, Shield, LineChart, ArrowDown } from "lucide-react";
 import RainingLetters from "@/components/RainingLetters";
 import WaitlistForm from "@/components/WaitlistForm";
@@ -40,17 +39,21 @@ const Index = () => {
       {/* Features Section */}
       <section className="py-20 bg-muted border-b border-white/5">
         <div className="container mx-auto px-4">
-          <div className="text-center max-w-3xl mx-auto mb-16 animate-fade-up">
-            <h2 className="text-3xl font-bold mb-4">Alert is the single most thing we rely on for all Observability.</h2>
-            <p className="text-muted-foreground">
-              We hope to ship great software trusting our alerts. But we often respond late, constantly find them bogus, and always end up more than a dozen to solve. We then miss the problems hiding in daylight, and every RCA ends with "one more Alert".
-            </p>
-            <p className="text-muted-foreground mt-4">
-              Alerts are boring and our tools to manage alerts have not improved in a decade. Now we believe AI will solve what humans could not. It's a good hope, but hope is not a strategy.
-            </p>
-            <p className="text-muted-foreground mt-4">
-              The Alerts company wants to change this. Same old problem, but modern tools. No promise of AI magic, just smart.
-            </p>
+          <div className="text-center max-w-3xl mx-auto mb-16 space-y-8">
+            <h2 className="text-4xl md:text-5xl font-bold mb-4 bg-gradient-to-r from-primary via-purple-500 to-primary bg-clip-text text-transparent animate-fade-up">
+              Alert is the single most thing we rely on for all Observability.
+            </h2>
+            <div className="space-y-6 animate-fade-up" style={{ animationDelay: '200ms' }}>
+              <p className="text-xl text-muted-foreground leading-relaxed">
+                We hope to ship great software trusting our alerts. But we often respond late, constantly find them bogus, and always end up more than a dozen to solve. We then miss the problems hiding in daylight, and every RCA ends with "one more Alert".
+              </p>
+              <p className="text-xl text-muted-foreground leading-relaxed">
+                Alerts are boring and our tools to manage alerts have not improved in a decade. Now we believe AI will solve what humans could not. It's a good hope, but hope is not a strategy.
+              </p>
+              <p className="text-xl font-semibold text-primary">
+                The Alerts company wants to change this. Same old problem, but modern tools. No promise of AI magic, just smart.
+              </p>
+            </div>
           </div>
           <div className="grid md:grid-cols-3 gap-8 max-w-5xl mx-auto">
             {[
