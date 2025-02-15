@@ -1,3 +1,4 @@
+
 import { Bell, X, Brain, Zap, Users, Shield, LineChart, ArrowDown } from "lucide-react";
 import RainingLetters from "@/components/RainingLetters";
 import WaitlistForm from "@/components/WaitlistForm";
@@ -29,7 +30,15 @@ const Index = () => {
       {/* Hero Section with RainingLetters and CTA */}
       <div className="h-[50vh] relative border-b border-white/5">
         <RainingLetters showForm={false} />
-        <div className="absolute bottom-8 left-0 right-0 flex justify-center z-30">
+        <div className="absolute inset-0 flex flex-col justify-center items-center z-30">
+          <div className="text-center space-y-4 mb-16">
+            <h1 className="text-4xl md:text-5xl font-bold text-white leading-tight mb-4">
+              The Simplest solution to Alerts is here.
+            </h1>
+            <h2 className="text-xl md:text-2xl font-bold text-white/90">
+              Ditch the Noise. Fight Fatigue. Focus on What's Critical.
+            </h2>
+          </div>
           <button
             onClick={scrollToWaitlist}
             className="px-12 py-6 text-xl font-medium text-white rounded-2xl shadow-[0_0_30px_rgba(14,165,233,0.3)] bg-gradient-to-r from-primary via-blue-500 to-primary hover:shadow-[0_0_40px_rgba(14,165,233,0.4)] transition-all duration-300 inline-flex items-center gap-2 border-2 border-white/20 hover:border-white/40"
@@ -39,6 +48,38 @@ const Index = () => {
           </button>
         </div>
       </div>
+
+      {/* Sub Hero Section */}
+      <section className="py-24 bg-muted border-b border-white/5">
+        <div className="container mx-auto px-4">
+          <div className="text-center max-w-3xl mx-auto mb-16">
+            <h2 className="text-3xl md:text-4xl font-bold text-white mb-12 leading-relaxed">
+              Reliable Software requires reliable alerts
+            </h2>
+            <div className="mx-auto max-w-[65ch] text-center leading-7 text-[#D9DCD6] md:text-xl space-y-8">
+              <p>
+                We build great software trusting our alerts—until we don't.
+                <br />
+                We respond too late, chase false alarms, and drown in a flood of notifications.
+                <br />
+                Critical issues slip by, and every RCA ends with: <i>"We need <strong>Better Alerts</strong>."</i>
+              </p>
+              <p>
+                Alerts remain broken and the tools to manage them? Stuck in the past.
+                <br />
+                AI promises a fix, but hope isn't a strategy.
+              </p>
+              <p className="text-lg md:text-xl font-medium text-primary">
+                The Alerts Company changes this.
+                <br />
+                Same problem, modern tools.
+                <br />
+                No AI gimmicks—just smart, battle-tested solutions that work.
+              </p>
+            </div>
+          </div>
+        </div>
+      </section>
 
       {/* Features Section */}
       <section className="py-24 bg-muted border-b border-white/5">
