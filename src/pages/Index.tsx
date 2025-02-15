@@ -1,4 +1,4 @@
-import { Bell, Brain, Zap, Users, Shield, LineChart, ArrowDown, ChevronDown } from "lucide-react";
+import { Bell, Brain, Zap, Users, Shield, LineChart, ArrowDown } from "lucide-react";
 import RainingLetters from "@/components/RainingLetters";
 import WaitlistForm from "@/components/WaitlistForm";
 
@@ -11,50 +11,24 @@ const Index = () => {
   const currentYear = new Date().getFullYear();
 
   return (
-    <div className="min-h-screen bg-gradient-to-b from-[#1A1F2C] via-[#000000] to-[#1A1F2C] text-foreground font-plus-jakarta">
+    <div className="min-h-screen bg-background text-foreground font-plus-jakarta">
       {/* Navigation */}
-      <nav className="fixed top-0 w-full bg-transparent backdrop-blur-sm z-50">
+      <nav className="fixed top-0 w-full bg-background/80 backdrop-blur-md z-50 border-b border-white/10">
         <div className="container mx-auto px-4 py-4 flex justify-between items-center">
           <div className="flex items-center space-x-2">
             <Bell className="w-6 h-6 text-primary" />
             <span className="font-semibold text-lg">The Alerts Company</span>
           </div>
-          <div className="hidden md:flex items-center space-x-8">
-            <div className="group relative">
-              <button className="flex items-center space-x-1 text-gray-300 hover:text-white transition-colors">
-                <span>Product</span>
-                <ChevronDown className="w-4 h-4" />
-              </button>
-            </div>
-            <div className="group relative">
-              <button className="flex items-center space-x-1 text-gray-300 hover:text-white transition-colors">
-                <span>Resources</span>
-                <ChevronDown className="w-4 h-4" />
-              </button>
-            </div>
-            <a href="#pricing" className="text-gray-300 hover:text-white transition-colors">
-              Pricing
-            </a>
-            <button onClick={scrollToWaitlist} className="px-6 py-2 bg-[#9b87f5] hover:bg-[#8b77e5] text-white rounded-lg font-medium transition-all">
-              Join Waitlist
-            </button>
-          </div>
         </div>
       </nav>
 
       {/* Hero Section with RainingLetters and CTA */}
-      <div className="h-[70vh] relative">
+      <div className="h-[50vh] relative border-b border-white/5">
         <RainingLetters showForm={false} />
-        <div className="absolute inset-0 flex flex-col items-center justify-center text-center px-4 z-30">
-          <h1 className="text-4xl md:text-6xl font-bold mb-6 max-w-4xl leading-tight">
-            Better Alert Management for Modern Teams
-          </h1>
-          <p className="text-xl md:text-2xl text-gray-300 mb-12 max-w-2xl">
-            Manage alerts effectively, reduce noise, and focus on what matters.
-          </p>
+        <div className="absolute bottom-8 left-0 right-0 flex justify-center z-30">
           <button
             onClick={scrollToWaitlist}
-            className="px-8 py-4 bg-[#9b87f5] hover:bg-[#8b77e5] text-white rounded-lg font-medium inline-flex items-center gap-2 transition-all shadow-lg shadow-[#9b87f5]/20"
+            className="px-8 py-4 bg-primary hover:bg-primary-hover text-white rounded-lg font-medium inline-flex items-center gap-2 transition-all animate-bounce shadow-lg shadow-primary/20"
           >
             Join Waitlist
             <ArrowDown className="w-4 h-4" />
@@ -63,10 +37,10 @@ const Index = () => {
       </div>
 
       {/* Features Section */}
-      <section className="py-24 bg-black/30 backdrop-blur-sm">
+      <section className="py-24 bg-muted border-b border-white/5">
         <div className="container mx-auto px-4">
           <div className="text-center max-w-3xl mx-auto mb-16 space-y-6">
-            <h2 className="text-3xl md:text-4xl font-bold bg-gradient-to-r from-[#9b87f5] via-[#b19af8] to-[#9b87f5] bg-clip-text text-transparent animate-fade-up leading-relaxed pb-2">
+            <h2 className="text-3xl md:text-4xl font-bold bg-gradient-to-r from-primary via-purple-500 to-primary bg-clip-text text-transparent animate-fade-up leading-relaxed pb-2">
               Reliability Starts with Effective Alerts
             </h2>
             <div className="mx-auto max-w-[65ch] text-center leading-7 text-[#D9DCD6] md:text-xl mb-10 md:mb-20 space-y-8">
@@ -131,9 +105,9 @@ const Index = () => {
       </section>
 
       {/* Metrics Section */}
-      <section className="py-24 bg-black/20 backdrop-blur-sm">
+      <section className="py-24 border-b border-white/5">
         <div className="container mx-auto px-4">
-          <h2 className="text-4xl md:text-5xl font-bold text-center mb-20 bg-gradient-to-r from-[#9b87f5] to-[#b19af8] bg-clip-text text-transparent leading-relaxed pb-2">
+          <h2 className="text-4xl md:text-5xl font-bold text-center mb-20 bg-gradient-to-r from-primary to-purple-500 bg-clip-text text-transparent leading-relaxed pb-2">
             Transform Your Alert Management
           </h2>
           <div className="grid md:grid-cols-3 gap-12 max-w-5xl mx-auto">
@@ -169,9 +143,9 @@ const Index = () => {
       </section>
 
       {/* Waitlist Section */}
-      <section id="waitlist" className="py-24 bg-black/30 backdrop-blur-sm">
+      <section id="waitlist" className="py-24 bg-muted border-b border-white/5">
         <div className="container mx-auto px-4 text-center">
-          <h2 className="text-4xl md:text-5xl font-bold mb-12 bg-gradient-to-r from-[#9b87f5] to-[#b19af8] bg-clip-text text-transparent leading-relaxed pb-2">
+          <h2 className="text-4xl md:text-5xl font-bold mb-12 bg-gradient-to-r from-primary to-purple-500 bg-clip-text text-transparent leading-relaxed pb-2">
             Ready to Transform Your Alert Management?
           </h2>
           <div className="max-w-md mx-auto">
@@ -181,8 +155,8 @@ const Index = () => {
       </section>
 
       {/* Footer */}
-      <footer className="py-8 bg-black/40">
-        <div className="container mx-auto px-4 text-center text-gray-400">
+      <footer className="py-8">
+        <div className="container mx-auto px-4 text-center text-muted-foreground">
           <p>&copy; {currentYear} The Alerts Company. All rights reserved.</p>
         </div>
       </footer>

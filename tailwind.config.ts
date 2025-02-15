@@ -1,3 +1,4 @@
+
 import type { Config } from "tailwindcss";
 
 export default {
@@ -22,19 +23,19 @@ export default {
         border: "hsl(var(--border))",
         input: "hsl(var(--input))",
         ring: "hsl(var(--ring))",
-        background: "#1A1F2C",
+        background: "#000000",
         foreground: "#ffffff",
         primary: {
-          DEFAULT: "#9b87f5",
-          hover: "#8b77e5",
+          DEFAULT: "#0EA5E9",
+          hover: "#0284C7",
           foreground: "#ffffff",
         },
         secondary: {
-          DEFAULT: "rgba(0, 0, 0, 0.3)",
+          DEFAULT: "#111111",
           foreground: "#ffffff",
         },
         muted: {
-          DEFAULT: "rgba(0, 0, 0, 0.2)",
+          DEFAULT: "#080808",
           foreground: "#9CA3AF",
         },
         accent: {
@@ -74,3 +75,4 @@ export default {
   },
   plugins: [require("tailwindcss-animate")],
 } satisfies Config;
+
