@@ -79,7 +79,12 @@ const RainingLetters = ({ showForm = true }: RainingLettersProps) => {
   }, [])
 
   return (
-    <div className="relative h-full bg-background overflow-hidden">
+    <div 
+      className="relative h-full overflow-hidden"
+      style={{
+        background: "linear-gradient(135deg, #000000 0%, #0e2a47 100%)"
+      }}
+    >
       {/* Title */}
       <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 z-20 w-full px-4">
         <ScrambledTitle />
@@ -126,4 +131,3 @@ const RainingLetters = ({ showForm = true }: RainingLettersProps) => {
 }
 
 export default RainingLetters
-
