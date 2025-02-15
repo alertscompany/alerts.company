@@ -1,4 +1,3 @@
-
 import { Bell, X, Brain, Zap, Users, Shield, LineChart, ArrowDown } from "lucide-react";
 import RainingLetters from "@/components/RainingLetters";
 import WaitlistForm from "@/components/WaitlistForm";
@@ -44,13 +43,15 @@ const Index = () => {
       {/* Features Section */}
       <section className="py-24 bg-muted border-b border-white/5">
         <div className="container mx-auto px-4">
-          <div className="text-center max-w-3xl mx-auto mb-16 space-y-6">
-            <h2 className="text-3xl md:text-4xl font-bold bg-gradient-to-r from-primary via-purple-500 to-primary bg-clip-text text-transparent animate-fade-up leading-relaxed pb-2">
-              Alerts Matter. People Matter More.
-            </h2>
-            <h3 className="text-xl md:text-2xl font-bold text-white animate-fade-up leading-relaxed">
-              Ditch the Noise. Fight Fatigue. Focus on What's Critical.
-            </h3>
+          <div className="text-center max-w-3xl mx-auto mb-16">
+            <div className="space-y-2 mb-12">
+              <h2 className="text-3xl md:text-4xl font-bold bg-gradient-to-r from-primary via-purple-500 to-primary bg-clip-text text-transparent animate-fade-up leading-relaxed">
+                Alerts Matter. People Matter More.
+              </h2>
+              <h3 className="text-xl md:text-2xl font-bold text-white/90 animate-fade-up leading-relaxed">
+                Ditch the Noise. Fight Fatigue. Focus on What's Critical.
+              </h3>
+            </div>
             <div className="mx-auto max-w-[65ch] text-center leading-7 text-[#D9DCD6] md:text-xl mb-10 md:mb-20 space-y-8">
               <p>
                 We hope to ship great software trusting our alerts. But we often respond late, constantly find them bogus, and always end up with more than a dozen to solve. We then miss the problems hiding in daylight, and every RCA ends with "one more Alert".
