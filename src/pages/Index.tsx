@@ -59,8 +59,8 @@ const Index = () => {
             </div>
             <div className="mx-auto max-w-[65ch] text-center leading-7 text-[#D9DCD6] md:text-xl mb-10 md:mb-20 space-y-8">
               <p>
-                We respond too late, chase false alarms, and drown in a flood of notifications.
-                <br />Critical issues slip by, and every RCA ends with: <i>"We need <strong>Better Alerts</strong>."</i>
+                Late responses. Bogus alerts. Critical issues slip by.
+                <br />And every RCA ends with: <i>"We need <strong>Better Alerts</strong>."</i>
               </p>
               <p>
                 Alerts remain broken and the tools to manage them? Stuck in the past.
