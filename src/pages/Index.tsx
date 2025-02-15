@@ -1,3 +1,4 @@
+
 import { Bell, X, Brain, Zap, Users, Shield, LineChart, ArrowDown } from "lucide-react";
 import RainingLetters from "@/components/RainingLetters";
 import WaitlistForm from "@/components/WaitlistForm";
@@ -10,15 +11,19 @@ const Index = () => {
 
   const currentYear = new Date().getFullYear();
 
+  const Logo = () => (
+    <div className="flex items-center space-x-3">
+      <Bell className="w-5 h-5 text-white" />
+      <span className="font-light tracking-wider text-lg uppercase">The Alerts Company</span>
+    </div>
+  );
+
   return (
     <div className="min-h-screen bg-background text-foreground font-plus-jakarta">
       {/* Navigation */}
       <nav className="fixed top-0 w-full bg-background/80 backdrop-blur-md z-50 border-b border-white/10">
         <div className="container mx-auto px-4 py-6">
-          <div className="flex items-center space-x-3">
-            <Bell className="w-5 h-5 text-white" />
-            <span className="font-light tracking-wider text-lg uppercase">The Alerts Company</span>
-          </div>
+          <Logo />
         </div>
       </nav>
 
@@ -158,6 +163,9 @@ const Index = () => {
       <footer className="py-8 border-t border-white/10">
         <div className="container mx-auto px-4">
           <div className="flex flex-col md:flex-row justify-between items-center gap-4">
+            <div className="flex items-center">
+              <Logo />
+            </div>
             <p className="text-muted-foreground text-sm">&copy; {currentYear} The Alerts Company. All rights reserved.</p>
             <div className="flex items-center space-x-6">
               <a
@@ -166,7 +174,9 @@ const Index = () => {
                 rel="noopener noreferrer"
                 className="text-muted-foreground hover:text-white transition-colors"
               >
-                <X className="w-5 h-5" />
+                <svg viewBox="0 0 24 24" className="w-5 h-5 fill-current">
+                  <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z" />
+                </svg>
               </a>
             </div>
           </div>
