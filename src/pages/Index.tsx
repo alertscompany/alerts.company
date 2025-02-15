@@ -29,7 +29,7 @@ const Index = () => {
         <div className="absolute bottom-8 left-0 right-0 flex justify-center z-30">
           <button
             onClick={scrollToWaitlist}
-            className="px-12 py-6 text-xl font-medium text-white rounded-2xl shadow-[0_0_30px_rgba(14,165,233,0.3)] bg-gradient-to-r from-primary via-blue-500 to-primary hover:shadow-[0_0_40px_rgba(14,165,233,0.4)] transition-all duration-300 inline-flex items-center gap-2 border border-primary/30"
+            className="px-12 py-6 text-xl font-medium text-white rounded-2xl shadow-[0_0_30px_rgba(14,165,233,0.3)] bg-gradient-to-r from-primary via-blue-500 to-primary hover:shadow-[0_0_40px_rgba(14,165,233,0.4)] transition-all duration-300 inline-flex items-center gap-2 border border-primary/70"
           >
             Join Waitlist
             <ArrowDown className="w-4 h-4" />
