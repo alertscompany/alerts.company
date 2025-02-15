@@ -82,7 +82,7 @@ const RainingLetters = ({ showForm = true }: RainingLettersProps) => {
     <div 
       className="relative h-full overflow-hidden"
       style={{
-        background: "linear-gradient(135deg, #000000 0%, #000000 10%, #061a2f 100%)"
+        background: "linear-gradient(180deg, #000000 0%, #000000 10%, #061a2f 100%)"
       }}
     >
       {/* Title */}
