@@ -44,7 +44,7 @@ const Index = () => {
       <section className="py-24 bg-muted border-b border-white/5">
         <div className="container mx-auto px-4">
           <div className="text-center max-w-3xl mx-auto mb-12">
-            <div className="space-y-2 mb-24">
+            <div className="space-y-2">
               <h2 className="text-3xl md:text-4xl font-bold bg-gradient-to-r from-primary via-purple-500 to-primary bg-clip-text text-transparent animate-fade-up leading-relaxed">
                 Ditch the Noise. Fight Fatigue.<br />Focus on what's Critical.
               </h2>
