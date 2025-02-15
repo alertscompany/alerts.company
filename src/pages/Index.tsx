@@ -1,4 +1,3 @@
-
 import { Bell, X, Brain, Zap, Users, Shield, LineChart, ArrowDown } from "lucide-react";
 import RainingLetters from "@/components/RainingLetters";
 import WaitlistForm from "@/components/WaitlistForm";
@@ -30,6 +29,14 @@ const Index = () => {
       {/* Hero Section with RainingLetters and CTA */}
       <div className="h-[50vh] relative border-b border-white/5">
         <RainingLetters showForm={false} />
+        <div className="absolute top-1/2 left-0 right-0 -translate-y-1/2 text-center z-30 space-y-4">
+          <h1 className="text-4xl md:text-5xl font-bold text-white">
+            Alerts Matter. People Matter More.
+          </h1>
+          <p className="text-xl md:text-2xl text-white/80 max-w-2xl mx-auto">
+            Ditch the Noise. Fight Fatigue. Focus on What's Critical.
+          </p>
+        </div>
         <div className="absolute bottom-8 left-0 right-0 flex justify-center z-30">
           <button
             onClick={scrollToWaitlist}
@@ -47,8 +54,6 @@ const Index = () => {
           <div className="text-center max-w-3xl mx-auto mb-16 space-y-6">
             <h2 className="text-3xl md:text-4xl font-bold bg-gradient-to-r from-primary via-purple-500 to-primary bg-clip-text text-transparent animate-fade-up leading-relaxed pb-2">
               Alerts Matter. People Matter More.
-              <br />
-              Ditch the Noise. Fight Fatigue. Focus on What's Critical.
             </h2>
             <div className="mx-auto max-w-[65ch] text-center leading-7 text-[#D9DCD6] md:text-xl mb-10 md:mb-20 space-y-8">
               <p>
