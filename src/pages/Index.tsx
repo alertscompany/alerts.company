@@ -45,7 +45,7 @@ const Index = () => {
         <div className="container mx-auto px-4">
           <div className="text-center max-w-3xl mx-auto mb-16">
             <div className="space-y-2 mb-12">
-              <h3 className="text-xl md:text-2xl font-bold text-white/90 animate-fade-up leading-relaxed">
+              <h3 className="text-2xl md:text-3xl font-bold text-white/90 animate-fade-up leading-relaxed">
                 Ditch the Noise. Fight Fatigue. Focus on What's Critical.
               </h3>
             </div>
