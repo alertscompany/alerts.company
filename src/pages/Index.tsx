@@ -14,7 +14,7 @@ const Index = () => {
   const Logo = () => (
     <div className="flex items-center space-x-3">
       <Bell className="w-5 h-5 text-white" />
-      <span className="font-light tracking-wider text-lg uppercase">The Alerts Company</span>
+      <span className="font-light tracking-[0.25em] text-base uppercase">The Alerts Company</span>
     </div>
   );
 
