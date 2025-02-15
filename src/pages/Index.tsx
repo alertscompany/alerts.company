@@ -45,14 +45,14 @@ const Index = () => {
         <div className="container mx-auto px-4">
           <div className="text-center max-w-3xl mx-auto mb-16">
             <div className="space-y-2 mb-12">
-              <h3 className="text-2xl md:text-3xl font-bold text-white/90 animate-fade-up leading-relaxed">
-                Ditch the Noise. Fight Fatigue.<br />Focus on what's Critical.
-              </h3>
-            </div>
-            <div className="space-y-2 mb-12">
               <h2 className="text-3xl md:text-4xl font-bold bg-gradient-to-r from-primary via-purple-500 to-primary bg-clip-text text-transparent animate-fade-up leading-relaxed">
-                Reliable Software requires Reliable Alerts
+                Ditch the Noise. Fight Fatigue.<br />Focus on what's Critical.
               </h2>
+            </div>
+            <div className="space-y-2 mb-12 mt-12 max-w-2xl mx-auto">
+              <h3 className="text-2xl md:text-3xl font-bold text-white/90 animate-fade-up leading-relaxed">
+                Reliable Software requires Reliable Alerts
+              </h3>
               <h3 className="text-xl md:text-2xl font-bold text-white/90 animate-fade-up leading-relaxed">
                 We build great software trusting our alerts—until we don't.
               </h3>
