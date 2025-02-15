@@ -41,7 +41,7 @@ const Index = () => {
       </div>
 
       {/* Hero Section */}
-      <section className="py-24 bg-muted border-b border-white/5">
+      <section className="py-24 border-b border-white/5">
         <div className="container mx-auto px-4">
           <div className="text-center max-w-3xl mx-auto mb-12">
             <div className="space-y-2">
