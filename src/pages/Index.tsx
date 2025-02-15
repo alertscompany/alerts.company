@@ -57,10 +57,14 @@ const Index = () => {
                 We build great software trusting our alerts—until we don't. We respond too late, chase false alarms, and drown in a flood of notifications. Critical issues slip by, and every RCA ends with: "We need better alerts."
               </p>
               <p>
-                Alerts are broken. The tools to manage them? Stuck in the past. AI promises a fix, but hope isn't a strategy.
+                <strong>Alerts are broken.</strong> The tools to manage them? Stuck in the past.
+                <br />
+                AI promises a fix, but hope isn't a strategy.
               </p>
               <p className="text-lg md:text-xl font-medium text-primary">
-                The Alerts Company changes this. Same problem, modern tools. No AI gimmicks—just smart, battle-tested solutions that work.
+                The Alerts Company changes this. Same problem, modern tools.
+                <br />
+                No AI gimmicks—just smart, battle-tested solutions that work.
               </p>
             </div>
           </div>
