@@ -80,6 +80,16 @@ const RainingLetters = ({ showForm = true }: RainingLettersProps) => {
 
   return (
     <div className="relative h-full bg-background overflow-hidden">
+      {/* Radial Gradient Overlay */}
+      <div 
+        className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 opacity-80"
+        style={{
+          width: '1845px',
+          height: '1230px',
+          background: 'radial-gradient(50% 50% at 50% 50%, rgba(92, 195, 250, 0.28) 0%, rgba(92, 195, 250, 0) 100%)',
+        }}
+      />
+
       {/* Title */}
       <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 z-20 w-full px-4">
         <ScrambledTitle />
@@ -126,4 +136,3 @@ const RainingLetters = ({ showForm = true }: RainingLettersProps) => {
 }
 
 export default RainingLetters
-
