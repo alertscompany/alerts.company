@@ -52,13 +52,15 @@ const Index = () => {
                 Ditch the Noise. Fight Fatigue. Focus on What's Critical.
               </h3>
             </div>
-            <div className="mx-auto max-w-[65ch] text-center leading-7 text-[#D9DCD6] md:text-xl mb-10 md:mb-20 space-y-8">
+            <div className="space-y-2 mb-12">
               <h2 className="text-3xl md:text-4xl font-bold bg-gradient-to-r from-primary via-purple-500 to-primary bg-clip-text text-transparent animate-fade-up leading-relaxed">
                 Reliable Software requires reliable alerts
               </h2>
               <h3 className="text-xl md:text-2xl font-bold text-white/90 animate-fade-up leading-relaxed">
                 We build great software trusting our alerts—until we don't.
               </h3>
+            </div>
+            <div className="mx-auto max-w-[65ch] text-center leading-7 text-[#D9DCD6] md:text-xl mb-10 md:mb-20 space-y-8">
               <p>
                 We respond too late, chase false alarms, and drown in a flood of notifications.
                 <br />Critical issues slip by, and every RCA ends with: <i>"We need <strong>Better Alerts</strong>."</i>
