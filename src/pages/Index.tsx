@@ -46,7 +46,9 @@ const Index = () => {
         <div className="container mx-auto px-4">
           <div className="text-center max-w-3xl mx-auto mb-16 space-y-6">
             <h2 className="text-3xl md:text-4xl font-bold bg-gradient-to-r from-primary via-purple-500 to-primary bg-clip-text text-transparent animate-fade-up leading-relaxed pb-2">
-              Reliability Starts with Effective Alerts
+              Alerts Matter. People Matter More.
+              <br />
+              Ditch the Noise. Fight Fatigue. Focus on What's Critical.
             </h2>
             <div className="mx-auto max-w-[65ch] text-center leading-7 text-[#D9DCD6] md:text-xl mb-10 md:mb-20 space-y-8">
               <p>
