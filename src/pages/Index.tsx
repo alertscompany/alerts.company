@@ -57,7 +57,7 @@ const Index = () => {
                 We build great software trusting our alerts—until we don't.
                 <br />
                 We respond too late, chase false alarms, and drown in a flood of notifications.
-                <br />Critical issues slip by, and every RCA ends with: <i>"We need better alerts."</i>
+                <br />Critical issues slip by, and every RCA ends with: <i>"We need <strong>Better Alerts</strong>."</i>
               </p>
               <p>
                 <strong>Alerts are broken.</strong> The tools to manage them? Stuck in the past.
