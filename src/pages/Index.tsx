@@ -54,7 +54,10 @@ const Index = () => {
             </div>
             <div className="mx-auto max-w-[65ch] text-center leading-7 text-[#D9DCD6] md:text-xl mb-10 md:mb-20 space-y-8">
               <p>
-                We build great software trusting our alerts—until we don't. We respond too late, chase false alarms, and drown in a flood of notifications. Critical issues slip by, and every RCA ends with: "We need better alerts."
+                We build great software trusting our alerts—until we don't.
+                <br />
+                We respond too late, chase false alarms, and drown in a flood of notifications.
+                <br />Critical issues slip by, and every RCA ends with: <i>"We need better alerts."</i>
               </p>
               <p>
                 <strong>Alerts are broken.</strong> The tools to manage them? Stuck in the past.
