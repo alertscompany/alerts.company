@@ -46,7 +46,7 @@ const Index = () => {
           <div className="text-center max-w-3xl mx-auto mb-16">
             <div className="space-y-2 mb-12">
               <h2 className="text-3xl md:text-4xl font-bold bg-gradient-to-r from-primary via-purple-500 to-primary bg-clip-text text-transparent animate-fade-up leading-relaxed">
-                Alerts Matter. People Matter More.
+                The Simplest solution to Alerts is here.
               </h2>
               <h3 className="text-xl md:text-2xl font-bold text-white/90 animate-fade-up leading-relaxed">
                 Ditch the Noise. Fight Fatigue. Focus on What's Critical.
@@ -54,13 +54,15 @@ const Index = () => {
             </div>
             <div className="mx-auto max-w-[65ch] text-center leading-7 text-[#D9DCD6] md:text-xl mb-10 md:mb-20 space-y-8">
               <p>
+                Reliable Software requires reliable alerts
+                <br />
                 We build great software trusting our alerts—until we don't.
                 <br />
                 We respond too late, chase false alarms, and drown in a flood of notifications.
                 <br />Critical issues slip by, and every RCA ends with: <i>"We need <strong>Better Alerts</strong>."</i>
               </p>
               <p>
-                <strong>Alerts are broken.</strong> The tools to manage them? Stuck in the past.
+                Alerts remain broken and the tools to manage them? Stuck in the past.
                 <br />
                 AI promises a fix, but hope isn't a strategy.
               </p>
