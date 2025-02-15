@@ -54,13 +54,13 @@ const Index = () => {
             </div>
             <div className="mx-auto max-w-[65ch] text-center leading-7 text-[#D9DCD6] md:text-xl mb-10 md:mb-20 space-y-8">
               <p>
-                We hope to ship great software trusting our alerts. But we often respond late, constantly find them bogus, and always end up with more than a dozen to solve. We then miss the problems hiding in daylight, and every RCA ends with "one more Alert".
+                We build great software trusting our alerts—until we don't. We respond too late, chase false alarms, and drown in a flood of notifications. Critical issues slip by, and every RCA ends with: "We need better alerts."
               </p>
               <p>
-                Alerts are boring and our tools to manage alerts have not improved in a decade. Now we believe AI will solve what humans could not. It's a good hope, but hope is not a strategy.
+                Alerts are broken. The tools to manage them? Stuck in the past. AI promises a fix, but hope isn't a strategy.
               </p>
               <p className="text-lg md:text-xl font-medium text-primary">
-                The Alerts company wants to change this. Same old problem, but modern tools. No promise of AI magic, just smart.
+                The Alerts Company changes this. Same problem, modern tools. No AI gimmicks—just smart, battle-tested solutions that work.
               </p>
             </div>
           </div>
