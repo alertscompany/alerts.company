@@ -37,7 +37,7 @@ export const PitchDeckSlide: React.FC<PitchDeckSlideProps> = ({
       </div>
 
       <div className="flex-1 flex gap-8">
-        <div className="flex-1 space-y-4 overflow-auto">
+        <div className="flex-1 space-y-4 overflow-y-auto">
           {content}
         </div>
         {visual && (
