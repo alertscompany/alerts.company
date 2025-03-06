@@ -27,7 +27,7 @@ const Index = () => {
         <div className="container mx-auto px-4 py-6 flex justify-between items-center">
           <Logo />
           <div>
-            <Link to="/pitch">
+            {/* <Link to="/pitch">
               <Button variant="outline" className="border-white/10 hover:bg-primary/10 hover:text-primary">
                 Pitch
               </Button>
@@ -36,7 +36,7 @@ const Index = () => {
               <Button variant="outline" className="border-white/10 hover:bg-primary/10 hover:text-primary">
                 Inbox
               </Button>
-            </Link>
+            </Link> */}
           </div>
         </div>
       </nav>
