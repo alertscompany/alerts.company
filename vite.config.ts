@@ -20,7 +20,6 @@ export default defineConfig(({ mode }) => ({
       "@": path.resolve(__dirname, "./src"),
     },
   },
-  // Ensure the build works with standard npm/node
   build: {
     outDir: "dist",
     minify: true,
