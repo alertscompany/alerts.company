@@ -1,6 +1,9 @@
+
 import { Bell, X, Brain, Zap, Users, Shield, LineChart, ArrowDown } from "lucide-react";
 import RainingLetters from "@/components/RainingLetters";
 import WaitlistForm from "@/components/WaitlistForm";
+import { Link } from "react-router-dom";
+import { Button } from "@/components/ui/button";
 
 const Index = () => {
   const scrollToWaitlist = () => {
@@ -21,8 +24,15 @@ const Index = () => {
     <div className="min-h-screen bg-background text-foreground font-plus-jakarta">
       {/* Navigation */}
       <nav className="fixed top-0 w-full bg-background/80 backdrop-blur-md z-50 border-b border-white/10">
-        <div className="container mx-auto px-4 py-6">
+        <div className="container mx-auto px-4 py-6 flex justify-between items-center">
           <Logo />
+          <div>
+            <Link to="/pitch-deck">
+              <Button variant="outline" className="border-white/10 hover:bg-primary/10 hover:text-primary">
+                Pitch Deck
+              </Button>
+            </Link>
+          </div>
         </div>
       </nav>
 
