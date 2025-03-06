@@ -3,7 +3,7 @@ import { Button } from "@/components/ui/button";
 import { ArrowLeft } from "lucide-react";
 import { Link } from "react-router-dom";
 
-const PitchDeck = () => {
+const Pitch = () => {
   return (
     <div className="min-h-screen bg-background text-foreground">
       {/* Navigation */}
@@ -15,7 +15,7 @@ const PitchDeck = () => {
                 <ArrowLeft className="h-5 w-5" />
               </Button>
             </Link>
-            <span className="font-light tracking-[0.25em] text-base uppercase">Pitch Deck</span>
+            <span className="font-light tracking-[0.25em] text-base uppercase">Pitch</span>
           </div>
         </div>
       </nav>
@@ -24,7 +24,7 @@ const PitchDeck = () => {
       <div className="container mx-auto px-4 pt-24 pb-12">
         <div className="max-w-4xl mx-auto">
           <h1 className="text-4xl font-bold mb-8 bg-gradient-to-r from-primary to-purple-500 bg-clip-text text-transparent">
-            The Alerts Company Pitch Deck
+            The Alerts Company Pitch
           </h1>
           
           {/* Slide 1: Problem */}
@@ -128,4 +128,4 @@ const PitchDeck = () => {
   );
 };
 
-export default PitchDeck;
+export default Pitch;

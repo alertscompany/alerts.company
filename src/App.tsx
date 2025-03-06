@@ -6,7 +6,7 @@ import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Index from "./pages/Index";
 import NotFound from "./pages/NotFound";
-import PitchDeck from "./pages/PitchDeck";
+import Pitch from "./pages/Pitch";
 import Inbox from "./pages/Inbox";
 
 const queryClient = new QueryClient();
@@ -19,7 +19,7 @@ const App = () => (
       <BrowserRouter>
         <Routes>
           <Route path="/" element={<Index />} />
-          <Route path="/pitch-deck" element={<PitchDeck />} />
+          <Route path="/pitch" element={<Pitch />} />
           <Route path="/inbox" element={<Inbox />} />
           {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
           <Route path="*" element={<NotFound />} />
