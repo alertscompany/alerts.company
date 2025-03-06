@@ -32,6 +32,11 @@ const Index = () => {
                 Pitch
               </Button>
             </Link>
+            <Link to="/inbox">
+              <Button variant="outline" className="border-white/10 hover:bg-primary/10 hover:text-primary">
+                Inbox
+              </Button>
+            </Link>
           </div>
         </div>
       </nav>
@@ -198,7 +203,7 @@ const Index = () => {
             <div className="flex items-center">
               <Logo />
             </div>
-            <p className="text-muted-foreground text-sm">&copy; {currentYear} The Alerts Company... All rights reserved.</p>
+            <p className="text-muted-foreground text-sm">&copy; {currentYear} The Alerts Company. All rights reserved.</p>
             <div className="flex items-center space-x-6">
               <a
                 href="https://twitter.com/alertscompany"
