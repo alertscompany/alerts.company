@@ -1,6 +1,6 @@
 
 import { useState, useEffect } from "react";
-import { Archive, ArrowLeft, Bell, Clock, Search, Inbox as InboxIcon, Star, Trash2, UserPlus, CheckCircle, AlertCircle, X, Filter, ChevronDown, ChevronUp, AlertTriangle, Circle } from "lucide-react";
+import { Archive, ArrowLeft, Bell, Clock, Search, Inbox as InboxIcon, Star, Trash2, UserPlus, CheckCircle, AlertCircle, X, Filter, ChevronDown, ChevronUp, AlertTriangle, Circle, Menu, ArrowLeft as Back } from "lucide-react";
 import { Link } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -30,6 +30,8 @@ const Inbox = () => {
   const [searchQuery, setSearchQuery] = useState("");
   const [activeFilter, setActiveFilter] = useState<Priority | "all">("all");
   const [showHelp, setShowHelp] = useState(false);
+  const [mobileView, setMobileView] = useState<"list" | "detail">("list");
+  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const { toast } = useToast();
 
   // Select first alert by default
@@ -154,25 +156,45 @@ const Inbox = () => {
     });
   };
 
+  const handleSelectAlert = (alert: Alert) => {
+    setSelectedAlert(alert);
+    // On mobile, switch to detail view when an alert is selected
+    if (window.innerWidth < 768) {
+      setMobileView("detail");
+    }
+  };
+
+  const handleBackToList = () => {
+    setMobileView("list");
+  };
+
   return (
     <div className="min-h-screen bg-background text-foreground flex flex-col">
       {/* Navigation */}
       <nav className="fixed top-0 w-full bg-background/80 backdrop-blur-md z-50 border-b border-white/10">
-        <div className="container mx-auto px-4 py-3 flex justify-between items-center">
-          <div className="flex items-center space-x-3">
-            <Link to="/">
+        <div className="container mx-auto px-2 sm:px-4 py-3 flex justify-between items-center">
+          <div className="flex items-center space-x-2">
+            <Link to="/" className="hidden sm:block">
               <Button variant="ghost" size="icon" className="mr-2">
                 <ArrowLeft className="h-5 w-5" />
               </Button>
             </Link>
+            <Button 
+              variant="ghost" 
+              size="icon" 
+              className="sm:hidden"
+              onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
+            >
+              <Menu className="h-5 w-5" />
+            </Button>
             <span className="font-medium tracking-wide">Incident Inbox</span>
           </div>
           <div className="flex items-center space-x-2">
-            <div className="relative w-64">
+            <div className="relative w-[120px] sm:w-64">
               <Search className="absolute left-2 top-2.5 h-4 w-4 text-muted-foreground" />
               <Input
                 id="search-input"
-                placeholder="Search (Ctrl+K)..."
+                placeholder="Search..."
                 value={searchQuery}
                 onChange={(e) => setSearchQuery(e.target.value)}
                 className="pl-8"
@@ -182,10 +204,93 @@ const Inbox = () => {
         </div>
       </nav>
 
+      {/* Mobile menu */}
+      {isMobileMenuOpen && (
+        <div className="fixed inset-0 bg-background z-40 pt-16 sm:hidden">
+          <div className="p-4 space-y-2">
+            <Button 
+              variant="ghost" 
+              className="w-full justify-start font-normal" 
+              onClick={() => {
+                setActiveFilter("all");
+                setIsMobileMenuOpen(false);
+              }}
+            >
+              <InboxIcon className="h-4 w-4 mr-2" />
+              <span>All</span>
+              <span className="ml-auto">{alerts.length}</span>
+            </Button>
+            <Button 
+              variant="ghost" 
+              className={cn(
+                "w-full justify-start font-normal",
+                activeFilter === "high" && "bg-red-500/10 text-red-400"
+              )}
+              onClick={() => {
+                setActiveFilter("high");
+                setIsMobileMenuOpen(false);
+              }}
+            >
+              <AlertTriangle className="h-4 w-4 mr-2 text-red-500" />
+              <span>High Priority</span>
+              <span className="ml-auto">{alerts.filter(a => a.priority === "high").length}</span>
+            </Button>
+            <Button 
+              variant="ghost" 
+              className={cn(
+                "w-full justify-start font-normal",
+                activeFilter === "medium" && "bg-amber-500/10 text-amber-400"
+              )}
+              onClick={() => {
+                setActiveFilter("medium");
+                setIsMobileMenuOpen(false);
+              }}
+            >
+              <Clock className="h-4 w-4 mr-2 text-amber-500" />
+              <span>Medium</span>
+              <span className="ml-auto">{alerts.filter(a => a.priority === "medium").length}</span>
+            </Button>
+            <Button 
+              variant="ghost" 
+              className={cn(
+                "w-full justify-start font-normal",
+                activeFilter === "low" && "bg-green-500/10 text-green-400"
+              )}
+              onClick={() => {
+                setActiveFilter("low");
+                setIsMobileMenuOpen(false);
+              }}
+            >
+              <Circle className="h-4 w-4 mr-2 text-green-500" />
+              <span>Low Priority</span>
+              <span className="ml-auto">{alerts.filter(a => a.priority === "low").length}</span>
+            </Button>
+            <div className="pt-4 border-t border-white/10">
+              <Button 
+                variant="ghost" 
+                className="w-full justify-start" 
+                onClick={() => {
+                  setShowHelp(true);
+                  setIsMobileMenuOpen(false);
+                }}
+              >
+                <span>Keyboard Shortcuts</span>
+              </Button>
+              <Link to="/" className="block mt-2">
+                <Button variant="ghost" className="w-full justify-start">
+                  <ArrowLeft className="h-4 w-4 mr-2" />
+                  <span>Back to Home</span>
+                </Button>
+              </Link>
+            </div>
+          </div>
+        </div>
+      )}
+
       {/* Main content */}
       <div className="flex flex-1 pt-16">
-        {/* Left sidebar */}
-        <div className="w-48 border-r border-white/10 p-4 h-[calc(100vh-64px)]">
+        {/* Left sidebar - hidden on mobile */}
+        <div className="hidden sm:block w-48 border-r border-white/10 p-4 h-[calc(100vh-64px)]">
           <div className="space-y-1">
             <Button 
               variant="ghost" 
@@ -235,8 +340,11 @@ const Inbox = () => {
           </div>
         </div>
 
-        {/* Alert list */}
-        <div className="w-1/3 border-r border-white/10 h-[calc(100vh-64px)] overflow-y-auto">
+        {/* Alert list - conditionally shown on mobile */}
+        <div className={cn(
+          "w-full sm:w-1/3 border-r border-white/10 h-[calc(100vh-64px)] overflow-y-auto",
+          mobileView === "detail" && "hidden sm:block"
+        )}>
           <div className="p-2 border-b border-white/10 sticky top-0 bg-background/80 backdrop-blur-md flex justify-between items-center">
             <span className="text-sm text-muted-foreground">
               {filteredAlerts.length} alert{filteredAlerts.length !== 1 ? 's' : ''}
@@ -264,22 +372,41 @@ const Inbox = () => {
                 key={alert.id}
                 alert={alert}
                 isSelected={selectedAlert?.id === alert.id}
-                onClick={() => setSelectedAlert(alert)}
+                onClick={() => handleSelectAlert(alert)}
               />
             ))
           )}
         </div>
 
-        {/* Alert details */}
+        {/* Alert details - conditionally shown on mobile */}
         {selectedAlert ? (
-          <div className="flex-1 h-[calc(100vh-64px)] overflow-y-auto">
+          <div className={cn(
+            "flex-1 h-[calc(100vh-64px)] overflow-y-auto",
+            mobileView === "list" && "hidden sm:block"
+          )}>
+            {mobileView === "detail" && (
+              <div className="p-2 border-b border-white/10 sticky top-0 bg-background/80 backdrop-blur-md sm:hidden">
+                <Button 
+                  variant="ghost" 
+                  size="sm" 
+                  className="text-muted-foreground"
+                  onClick={handleBackToList}
+                >
+                  <Back className="h-4 w-4 mr-1" />
+                  <span className="text-xs">Back to list</span>
+                </Button>
+              </div>
+            )}
             <AlertDetail
               alert={selectedAlert}
               onAction={(action) => handleAction(selectedAlert.id, action)}
             />
           </div>
         ) : (
-          <div className="flex-1 flex items-center justify-center text-muted-foreground">
+          <div className={cn(
+            "flex-1 flex items-center justify-center text-muted-foreground",
+            mobileView === "list" && "hidden sm:block"
+          )}>
             <div className="text-center">
               <Bell className="h-16 w-16 mx-auto mb-4 opacity-20" />
               <p className="text-xl font-medium">No alert selected</p>
@@ -292,7 +419,7 @@ const Inbox = () => {
       {/* Keyboard shortcut help */}
       {showHelp && (
         <div className="fixed inset-0 bg-black/80 backdrop-blur-sm z-50 flex items-center justify-center">
-          <div className="bg-secondary p-6 rounded-lg max-w-md w-full">
+          <div className="bg-secondary p-6 rounded-lg max-w-md w-full mx-4">
             <div className="flex justify-between items-center mb-4">
               <h2 className="text-xl font-bold">Keyboard Shortcuts</h2>
               <Button variant="ghost" size="icon" onClick={() => setShowHelp(false)}>

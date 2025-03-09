@@ -38,7 +38,7 @@ const AlertDetail = ({ alert, onAction }: AlertDetailProps) => {
   };
 
   return (
-    <div className="p-6 max-w-3xl mx-auto">
+    <div className="p-4 sm:p-6 max-w-3xl mx-auto">
       {/* Alert header */}
       <div className="flex items-center mb-1">
         {getPriorityIcon(alert.priority)}
@@ -55,7 +55,7 @@ const AlertDetail = ({ alert, onAction }: AlertDetailProps) => {
       </div>
 
       {/* Alert title */}
-      <h1 className="text-2xl font-semibold mb-4">{alert.title}</h1>
+      <h1 className="text-xl sm:text-2xl font-semibold mb-4">{alert.title}</h1>
       
       {/* Service info */}
       <div className="mb-6 flex items-center">
@@ -74,8 +74,8 @@ const AlertDetail = ({ alert, onAction }: AlertDetailProps) => {
       </div>
 
       {/* Action toolbar */}
-      <div className="border-t border-white/10 pt-4 flex justify-between">
-        <div className="grid grid-cols-4 gap-3 w-full">
+      <div className="border-t border-white/10 pt-4">
+        <div className="grid grid-cols-2 sm:grid-cols-4 gap-2 sm:gap-3 w-full">
           <Button 
             onClick={() => onAction("do")} 
             className="flex flex-col gap-1 h-auto py-3"
@@ -115,8 +115,8 @@ const AlertDetail = ({ alert, onAction }: AlertDetailProps) => {
         </div>
       </div>
 
-      {/* Keyboard shortcut hint */}
-      <div className="mt-6 text-center">
+      {/* Keyboard shortcut hint - hide on very small screens */}
+      <div className="mt-6 text-center hidden sm:block">
         <p className="text-xs text-muted-foreground">Press <kbd className="px-1.5 py-0.5 bg-secondary rounded text-xs">?</kbd> to view all keyboard shortcuts</p>
       </div>
     </div>
