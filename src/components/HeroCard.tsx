@@ -1,5 +1,4 @@
 
-import { Card, CardContent } from "@/components/ui/card";
 import { Avatar, AvatarImage, AvatarFallback } from "@/components/ui/avatar";
 
 // Import the FilterType directly from the file
@@ -31,7 +30,7 @@ const HeroCard = ({ activeFilter }: HeroCardProps) => {
     }
   };
 
-  // Get category title for display
+  // Get category title for avatar fallback
   const getCategoryTitle = () => {
     switch (activeFilter) {
       case "active":
@@ -52,21 +51,18 @@ const HeroCard = ({ activeFilter }: HeroCardProps) => {
   };
 
   return (
-    <Card className="mb-6 overflow-hidden border-none shadow-lg bg-transparent">
-      <CardContent className="p-6 flex flex-col items-center justify-center">
-        <Avatar className="h-40 w-40 border-4 border-white shadow-xl">
-          <AvatarImage
-            src={getImageForCategory()}
-            alt={`${getCategoryTitle()} category icon`}
-            className="object-cover"
-          />
-          <AvatarFallback className="bg-primary text-3xl font-bold">
-            {getCategoryTitle().charAt(0)}
-          </AvatarFallback>
-        </Avatar>
-        <h2 className="mt-4 text-2xl font-semibold text-gray-800">{getCategoryTitle()}</h2>
-      </CardContent>
-    </Card>
+    <div className="fixed top-24 left-8 z-10">
+      <Avatar className="h-20 w-20 border-4 border-white shadow-xl">
+        <AvatarImage
+          src={getImageForCategory()}
+          alt={`${getCategoryTitle()} category icon`}
+          className="object-cover"
+        />
+        <AvatarFallback className="bg-primary text-2xl font-bold">
+          {getCategoryTitle().charAt(0)}
+        </AvatarFallback>
+      </Avatar>
+    </div>
   );
 };
 
