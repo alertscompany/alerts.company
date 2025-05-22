@@ -1,14 +1,13 @@
 
 import { cn } from "@/lib/utils";
 import { Alert } from "@/pages/Inbox";
-import { MoreHorizontal } from "lucide-react";
+import { MoreHorizontal, Check, Clock, UserPlus, Trash2 } from "lucide-react";
 import {
-  ContextMenu,
-  ContextMenuContent,
-  ContextMenuItem,
-  ContextMenuTrigger,
-} from "@/components/ui/context-menu";
-import { Check, Clock, UserPlus, Trash2 } from "lucide-react";
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuItem,
+  DropdownMenuTrigger,
+} from "@/components/ui/dropdown-menu";
 
 interface AlertItemProps {
   alert: Alert;
@@ -22,7 +21,7 @@ const AlertItem = ({ alert, isSelected, onClick, formatTimeAgo, onAction }: Aler
   return (
     <div 
       className={cn(
-        "border-b border-gray-100 py-8 px-8 cursor-pointer hover:bg-gray-50 transition-colors",
+        "border-b border-gray-100 py-6 px-8 cursor-pointer hover:bg-gray-50 transition-colors",
         isSelected ? "bg-gray-50" : "bg-white"
       )}
       onClick={onClick}
@@ -31,34 +30,34 @@ const AlertItem = ({ alert, isSelected, onClick, formatTimeAgo, onAction }: Aler
         <div className="text-base font-medium">{alert.title}</div>
         <div className="flex items-center gap-2">
           <div className="text-sm text-gray-500">{formatTimeAgo(alert.timestamp)}</div>
-          <ContextMenu>
-            <ContextMenuTrigger>
+          <DropdownMenu>
+            <DropdownMenuTrigger asChild>
               <button 
                 className="p-1.5 rounded-full hover:bg-gray-100"
                 onClick={(e) => e.stopPropagation()}
               >
                 <MoreHorizontal className="h-5 w-5 text-gray-500" />
               </button>
-            </ContextMenuTrigger>
-            <ContextMenuContent className="w-48">
-              <ContextMenuItem onClick={() => onAction(alert.id, "do")}>
+            </DropdownMenuTrigger>
+            <DropdownMenuContent className="w-48">
+              <DropdownMenuItem onClick={() => onAction(alert.id, "do")}>
                 <Check className="mr-2 h-4 w-4 text-green-500" />
                 <span>Do</span>
-              </ContextMenuItem>
-              <ContextMenuItem onClick={() => onAction(alert.id, "defer")}>
+              </DropdownMenuItem>
+              <DropdownMenuItem onClick={() => onAction(alert.id, "defer")}>
                 <Clock className="mr-2 h-4 w-4 text-amber-500" />
                 <span>Defer</span>
-              </ContextMenuItem>
-              <ContextMenuItem onClick={() => onAction(alert.id, "delegate")}>
+              </DropdownMenuItem>
+              <DropdownMenuItem onClick={() => onAction(alert.id, "delegate")}>
                 <UserPlus className="mr-2 h-4 w-4 text-blue-500" />
                 <span>Delegate</span>
-              </ContextMenuItem>
-              <ContextMenuItem onClick={() => onAction(alert.id, "delete")}>
+              </DropdownMenuItem>
+              <DropdownMenuItem onClick={() => onAction(alert.id, "delete")}>
                 <Trash2 className="mr-2 h-4 w-4 text-rose-500" />
                 <span>Delete</span>
-              </ContextMenuItem>
-            </ContextMenuContent>
-          </ContextMenu>
+              </DropdownMenuItem>
+            </DropdownMenuContent>
+          </DropdownMenu>
         </div>
       </div>
       <p className="text-sm text-gray-600 mb-3">

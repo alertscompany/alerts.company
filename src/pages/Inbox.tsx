@@ -1,13 +1,11 @@
 
 import { useState } from "react";
-import { Search, Filter } from "lucide-react";
-import { Button } from "@/components/ui/button";
+import { Search } from "lucide-react";
 import { Input } from "@/components/ui/input";
 import { cn } from "@/lib/utils";
 import { useToast } from "@/hooks/use-toast";
 import { mockAlerts } from "@/data/mockAlerts";
 import AlertItem from "@/components/AlertItem";
-import AlertDetail from "@/components/AlertDetail";
 import { ToggleGroup, ToggleGroupItem } from "@/components/ui/toggle-group";
 
 export type Priority = "high" | "medium" | "low";
@@ -27,7 +25,7 @@ type FilterType = "all" | "active" | "acknowledged" | "resolved";
 
 const Inbox = () => {
   const [alerts, setAlerts] = useState<Alert[]>(mockAlerts);
-  const [selectedAlert, setSelectedAlert] = useState<Alert | null>(alerts[0] || null);
+  const [selectedAlert, setSelectedAlert] = useState<Alert | null>(null);
   const [searchQuery, setSearchQuery] = useState("");
   const [activeFilter, setActiveFilter] = useState<FilterType>("all");
   const { toast } = useToast();
@@ -47,8 +45,6 @@ const Inbox = () => {
   });
 
   const handleAction = (alertId: string, action: "do" | "defer" | "delegate" | "delete") => {
-    if (!selectedAlert) return;
-
     let actionMessage = "";
     let updatedAlerts = [...alerts];
     
@@ -68,14 +64,6 @@ const Inbox = () => {
       case "delete":
         actionMessage = "Deleted";
         updatedAlerts = updatedAlerts.filter(alert => alert.id !== alertId);
-        // Select the next alert if available
-        if (updatedAlerts.length > 0) {
-          const index = alerts.findIndex(a => a.id === alertId);
-          const nextIndex = index < updatedAlerts.length ? index : updatedAlerts.length - 1;
-          setSelectedAlert(updatedAlerts[nextIndex]);
-        } else {
-          setSelectedAlert(null);
-        }
         break;
     }
 
@@ -109,13 +97,7 @@ const Inbox = () => {
   };
 
   const handleAlertClick = (alert: Alert) => {
-    setSelectedAlert(alert);
-  };
-
-  const handleDetailAction = (action: "do" | "defer" | "delegate" | "delete") => {
-    if (selectedAlert) {
-      handleAction(selectedAlert.id, action);
-    }
+    setSelectedAlert(alert.id === selectedAlert?.id ? null : alert);
   };
 
   return (
@@ -154,34 +136,22 @@ const Inbox = () => {
         </ToggleGroup>
       </div>
 
-      <div className="flex">
-        {/* Main content */}
-        <div className="flex-1">
-          {filteredAlerts.length > 0 ? (
-            filteredAlerts.map(alert => (
-              <AlertItem 
-                key={alert.id} 
-                alert={alert} 
-                isSelected={selectedAlert?.id === alert.id}
-                onClick={() => handleAlertClick(alert)}
-                formatTimeAgo={formatTimeAgo}
-                onAction={handleAction}
-              />
-            ))
-          ) : (
-            <div className="flex items-center justify-center h-64 text-gray-400">
-              <p>No messages match your criteria</p>
-            </div>
-          )}
-        </div>
-
-        {/* Detail panel - only shown on larger screens */}
-        {selectedAlert && (
-          <div className="w-1/2 border-l border-gray-200 bg-white hidden lg:block h-[calc(100vh-140px)] overflow-auto">
-            <AlertDetail 
-              alert={selectedAlert}
-              onAction={handleDetailAction}
+      {/* Message Stream - Full Width */}
+      <div className="container mx-auto max-w-5xl">
+        {filteredAlerts.length > 0 ? (
+          filteredAlerts.map(alert => (
+            <AlertItem 
+              key={alert.id} 
+              alert={alert} 
+              isSelected={selectedAlert?.id === alert.id}
+              onClick={() => handleAlertClick(alert)}
+              formatTimeAgo={formatTimeAgo}
+              onAction={handleAction}
             />
+          ))
+        ) : (
+          <div className="flex items-center justify-center h-64 text-gray-400">
+            <p>No messages match your criteria</p>
           </div>
         )}
       </div>
