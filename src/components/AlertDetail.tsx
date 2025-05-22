@@ -100,7 +100,7 @@ const AlertDetail = ({ alert, onAction }: AlertDetailProps) => {
             <span className="text-sm font-medium">Delegate (D)</span>
           </Button>
           <Button 
-            onClick={() => onAction("archive")} 
+            onClick={() => onAction("delete")} 
             className="flex flex-col items-center gap-1.5 h-auto py-4 bg-white hover:bg-gray-50 text-gray-800 border border-gray-200 rounded-xl shadow-sm"
             variant="outline"
           >
