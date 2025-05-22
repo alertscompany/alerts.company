@@ -145,21 +145,23 @@ const Inbox = () => {
         </ToggleGroup>
       </div>
 
-      {/* Message Stream - Full Width */}
-      <div className="container mx-auto max-w-5xl">
+      {/* Message Stream - Slack Block Kit Style */}
+      <div className="container mx-auto max-w-4xl py-4">
         {filteredAlerts.length > 0 ? (
-          filteredAlerts.map(alert => (
-            <AlertItem 
-              key={alert.id} 
-              alert={alert} 
-              isSelected={selectedAlert?.id === alert.id}
-              onClick={() => handleAlertClick(alert)}
-              formatTimeAgo={formatTimeAgo}
-              onAction={handleAction}
-            />
-          ))
+          <div className="space-y-4">
+            {filteredAlerts.map(alert => (
+              <AlertItem 
+                key={alert.id} 
+                alert={alert} 
+                isSelected={selectedAlert?.id === alert.id}
+                onClick={() => handleAlertClick(alert)}
+                formatTimeAgo={formatTimeAgo}
+                onAction={handleAction}
+              />
+            ))}
+          </div>
         ) : (
-          <div className="flex items-center justify-center h-64 text-gray-400">
+          <div className="flex items-center justify-center h-64 bg-white rounded-lg border border-gray-200 shadow-sm p-6 text-gray-400">
             <p>No messages match your criteria</p>
           </div>
         )}

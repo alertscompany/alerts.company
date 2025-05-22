@@ -21,15 +21,18 @@ const AlertItem = ({ alert, isSelected, onClick, formatTimeAgo, onAction }: Aler
   return (
     <div 
       className={cn(
-        "border-b border-gray-100 py-6 px-8 cursor-pointer hover:bg-gray-50 transition-colors",
-        isSelected ? "bg-gray-50" : "bg-white"
+        "bg-white rounded-lg border border-gray-200 shadow-sm overflow-hidden",
+        isSelected ? "border-blue-300 ring-1 ring-blue-300" : ""
       )}
       onClick={onClick}
     >
-      <div className="flex items-center justify-between mb-2">
-        <div className="text-base font-medium">{alert.title}</div>
-        <div className="flex items-center gap-2">
-          <div className="text-sm text-gray-500">{formatTimeAgo(alert.timestamp)}</div>
+      {/* Slack-like message header */}
+      <div className="border-l-4 border-blue-500 pl-4 pr-6 py-4">
+        <div className="flex items-center justify-between mb-1">
+          <div className="flex items-center gap-2">
+            <div className="font-medium text-gray-900">{alert.service}</div>
+            <div className="text-xs text-gray-500">{formatTimeAgo(alert.timestamp)}</div>
+          </div>
           <DropdownMenu>
             <DropdownMenuTrigger asChild>
               <button 
@@ -59,25 +62,33 @@ const AlertItem = ({ alert, isSelected, onClick, formatTimeAgo, onAction }: Aler
             </DropdownMenuContent>
           </DropdownMenu>
         </div>
-      </div>
-      <p className="text-sm text-gray-600 mb-3">
-        {alert.description}
-      </p>
-      <div className="flex items-center">
-        <span className="text-xs px-2 py-0.5 rounded-full border border-gray-200 text-gray-500 mr-2">
-          MTTR
-        </span>
-        <span className="text-xs px-2 py-0.5 rounded-full border border-gray-200 text-gray-500">
-          MTTA
-        </span>
-        <div className="ml-auto text-xs text-gray-500">
-          {alert.status === "active" ? (
-            <span className="text-amber-600">{alert.service}</span>
-          ) : alert.status === "acknowledged" ? (
-            <span className="text-blue-600">{alert.service}</span>
-          ) : (
-            <span className="text-green-600">{alert.service}</span>
-          )}
+        
+        {/* Message title */}
+        <h3 className="text-base font-bold mb-2">{alert.title}</h3>
+        
+        {/* Message content */}
+        <div className="text-sm text-gray-700 mb-4">
+          {alert.description}
+        </div>
+        
+        {/* Status tags at bottom */}
+        <div className="flex items-center gap-2 mt-2">
+          <span className={cn(
+            "text-xs px-2.5 py-1 rounded-full font-medium",
+            alert.status === "active" ? "bg-amber-100 text-amber-800" : 
+            alert.status === "acknowledged" ? "bg-blue-100 text-blue-800" : 
+            "bg-green-100 text-green-800"
+          )}>
+            {alert.status === "active" ? "Needs Decision" : 
+             alert.status === "acknowledged" ? "In Progress" : 
+             "Resolved"}
+          </span>
+          <span className="text-xs px-2.5 py-1 rounded-full bg-gray-100 text-gray-800">
+            MTTR
+          </span>
+          <span className="text-xs px-2.5 py-1 rounded-full bg-gray-100 text-gray-800">
+            MTTA
+          </span>
         </div>
       </div>
     </div>
