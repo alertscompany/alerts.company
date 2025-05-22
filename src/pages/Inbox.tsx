@@ -1,13 +1,10 @@
 
-import { useState, useEffect } from "react";
-import { Archive, ArrowLeft, Bell, Clock, Search, Inbox as InboxIcon, Star, Trash2, UserPlus, CheckCircle, AlertCircle, X, Filter, ChevronDown, ChevronUp, AlertTriangle, Circle, Menu, ArrowLeft as Back } from "lucide-react";
-import { Link } from "react-router-dom";
+import { useState } from "react";
+import { Archive, ArrowLeft, Check, Clock, Search, UserPlus, Trash2, MoreVertical, Tag } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { cn } from "@/lib/utils";
 import { useToast } from "@/hooks/use-toast";
-import AlertItem from "@/components/AlertItem";
-import AlertDetail from "@/components/AlertDetail";
 import { mockAlerts } from "@/data/mockAlerts";
 
 export type Priority = "high" | "medium" | "low";
@@ -26,427 +23,230 @@ export interface Alert {
 
 const Inbox = () => {
   const [alerts, setAlerts] = useState<Alert[]>(mockAlerts);
-  const [selectedAlert, setSelectedAlert] = useState<Alert | null>(null);
+  const [selectedAlert, setSelectedAlert] = useState<Alert | null>(alerts[0] || null);
   const [searchQuery, setSearchQuery] = useState("");
-  const [activeFilter, setActiveFilter] = useState<Priority | "all">("all");
-  const [showHelp, setShowHelp] = useState(false);
-  const [mobileView, setMobileView] = useState<"list" | "detail">("list");
-  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const { toast } = useToast();
-
-  // Select first alert by default
-  useEffect(() => {
-    if (!selectedAlert && alerts.length > 0) {
-      setSelectedAlert(alerts[0]);
-    }
-  }, [alerts, selectedAlert]);
-
-  // Handle keyboard shortcuts
-  useEffect(() => {
-    const handleKeyDown = (e: KeyboardEvent) => {
-      if (e.ctrlKey && e.key === "k") {
-        e.preventDefault();
-        document.getElementById("search-input")?.focus();
-      }
-      
-      // Show/hide keyboard shortcuts
-      if (e.key === "?") {
-        setShowHelp(prev => !prev);
-      }
-      
-      if (selectedAlert) {
-        // Navigation shortcuts
-        if (e.key === "j" || e.key === "ArrowDown") {
-          e.preventDefault();
-          const currentIndex = alerts.findIndex(a => a.id === selectedAlert.id);
-          if (currentIndex < alerts.length - 1) {
-            setSelectedAlert(alerts[currentIndex + 1]);
-          }
-        }
-        
-        if (e.key === "k" || e.key === "ArrowUp") {
-          e.preventDefault();
-          const currentIndex = alerts.findIndex(a => a.id === selectedAlert.id);
-          if (currentIndex > 0) {
-            setSelectedAlert(alerts[currentIndex - 1]);
-          }
-        }
-        
-        // Action shortcuts
-        if (e.key === "e") {
-          handleAction(selectedAlert.id, "do");
-        }
-        if (e.key === "s") {
-          handleAction(selectedAlert.id, "defer");
-        }
-        if (e.key === "d") {
-          handleAction(selectedAlert.id, "delegate");
-        }
-        if (e.key === "#") {
-          handleAction(selectedAlert.id, "delete");
-        }
-      }
-    };
-
-    window.addEventListener("keydown", handleKeyDown);
-    return () => window.removeEventListener("keydown", handleKeyDown);
-  }, [alerts, selectedAlert]);
-
-  const filteredAlerts = alerts.filter(
-    (alert) => {
-      const matchesSearch = 
-        alert.title.toLowerCase().includes(searchQuery.toLowerCase()) ||
-        alert.service.toLowerCase().includes(searchQuery.toLowerCase()) ||
-        alert.description.toLowerCase().includes(searchQuery.toLowerCase());
-      
-      const matchesFilter = activeFilter === "all" || alert.priority === activeFilter;
-      
-      return matchesSearch && matchesFilter;
-    }
+  
+  const filteredAlerts = alerts.filter(alert => 
+    alert.title.toLowerCase().includes(searchQuery.toLowerCase()) ||
+    alert.description.toLowerCase().includes(searchQuery.toLowerCase())
   );
 
-  const handleAction = (alertId: string, action: AlertAction) => {
-    const currentAlert = alerts.find((a) => a.id === alertId);
-    if (!currentAlert) return;
+  const handleAction = (action: AlertAction) => {
+    if (!selectedAlert) return;
 
-    let newAlerts = [...alerts];
-    let actionTaken = "";
-    let nextStatus: Status = "active";
-
+    let actionMessage = "";
+    let updatedAlerts = [...alerts];
+    
     switch (action) {
       case "do":
-        actionTaken = "marked as being worked on";
-        nextStatus = "acknowledged";
+        actionMessage = "Marked as done";
+        updatedAlerts = updatedAlerts.map(alert => 
+          alert.id === selectedAlert.id ? { ...alert, status: "acknowledged" as Status } : alert
+        );
         break;
       case "defer":
-        actionTaken = "deferred for later";
+        actionMessage = "Deferred for later";
         break;
       case "delegate":
-        actionTaken = "delegated to another team member";
+        actionMessage = "Delegated to team";
         break;
       case "delete":
-        actionTaken = "deleted";
-        newAlerts = alerts.filter((a) => a.id !== alertId);
-        
-        // Select next alert if available
-        const currentIndex = alerts.findIndex(a => a.id === alertId);
-        if (newAlerts.length > 0) {
-          if (currentIndex < newAlerts.length) {
-            setSelectedAlert(newAlerts[currentIndex]);
-          } else {
-            setSelectedAlert(newAlerts[newAlerts.length - 1]);
-          }
+        actionMessage = "Deleted";
+        updatedAlerts = updatedAlerts.filter(alert => alert.id !== selectedAlert.id);
+        // Select the next alert if available
+        if (updatedAlerts.length > 0) {
+          const index = alerts.findIndex(a => a.id === selectedAlert.id);
+          const nextIndex = index < updatedAlerts.length ? index : updatedAlerts.length - 1;
+          setSelectedAlert(updatedAlerts[nextIndex]);
         } else {
           setSelectedAlert(null);
         }
         break;
     }
 
-    if (action !== "delete") {
-      newAlerts = newAlerts.map((a) => 
-        a.id === alertId ? { ...a, status: nextStatus } : a
-      );
-    }
-
-    setAlerts(newAlerts);
-    
+    setAlerts(updatedAlerts);
     toast({
-      title: `Alert ${actionTaken}`,
-      description: currentAlert.title
+      title: actionMessage,
+      description: selectedAlert.title
     });
   };
 
-  const handleSelectAlert = (alert: Alert) => {
-    setSelectedAlert(alert);
-    // On mobile, switch to detail view when an alert is selected
-    if (window.innerWidth < 768) {
-      setMobileView("detail");
+  const formatTimeAgo = (timestamp: string) => {
+    const date = new Date(timestamp);
+    const now = new Date();
+    const diffDays = Math.floor((now.getTime() - date.getTime()) / (1000 * 60 * 60 * 24));
+    
+    if (diffDays === 0) {
+      return "Today";
+    } else if (diffDays === 1) {
+      return "Yesterday";
+    } else if (diffDays < 7) {
+      return `${diffDays} days ago`;
+    } else if (diffDays < 30) {
+      return `${Math.floor(diffDays / 7)} weeks ago`;
+    } else {
+      return `${Math.floor(diffDays / 30)} months ago`;
     }
   };
 
-  const handleBackToList = () => {
-    setMobileView("list");
-  };
-
   return (
-    <div className="min-h-screen bg-background text-foreground flex flex-col">
-      {/* Navigation */}
-      <nav className="fixed top-0 w-full bg-background/80 backdrop-blur-md z-50 border-b border-white/10">
-        <div className="container mx-auto px-2 sm:px-4 py-3 flex justify-between items-center">
-          <div className="flex items-center space-x-2">
-            <Link to="/" className="hidden sm:block">
-              <Button variant="ghost" size="icon" className="mr-2">
-                <ArrowLeft className="h-5 w-5" />
-              </Button>
-            </Link>
-            <Button 
-              variant="ghost" 
-              size="icon" 
-              className="sm:hidden"
-              onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
-            >
-              <Menu className="h-5 w-5" />
-            </Button>
-            <span className="font-medium tracking-wide">Incident Inbox</span>
-          </div>
-          <div className="flex items-center space-x-2">
-            <div className="relative w-[120px] sm:w-64">
-              <Search className="absolute left-2 top-2.5 h-4 w-4 text-muted-foreground" />
-              <Input
-                id="search-input"
-                placeholder="Search..."
-                value={searchQuery}
-                onChange={(e) => setSearchQuery(e.target.value)}
-                className="pl-8"
-              />
-            </div>
-          </div>
+    <div className="min-h-screen bg-[#F9FAFB] text-[#1A1A1A]">
+      {/* Header */}
+      <header className="border-b border-gray-200 bg-white px-6 py-4 flex items-center justify-between">
+        <div className="flex items-center">
+          <Button variant="ghost" size="icon" className="mr-2">
+            <ArrowLeft className="h-5 w-5" />
+          </Button>
+          <h1 className="text-2xl font-semibold">Inbox</h1>
         </div>
-      </nav>
+        <div className="relative w-64">
+          <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 h-4 w-4 text-gray-400" />
+          <Input
+            placeholder="Search..."
+            value={searchQuery}
+            onChange={(e) => setSearchQuery(e.target.value)}
+            className="pl-10 bg-gray-50 border border-gray-200"
+          />
+        </div>
+      </header>
 
-      {/* Mobile menu */}
-      {isMobileMenuOpen && (
-        <div className="fixed inset-0 bg-background z-40 pt-16 sm:hidden">
-          <div className="p-4 space-y-2">
+      <div className="flex h-[calc(100vh-72px)]">
+        {/* Sidebar */}
+        <aside className="w-64 border-r border-gray-200 bg-white py-6 px-4 hidden md:block">
+          <div className="mb-8">
+            <h2 className="text-sm font-semibold text-gray-500 mb-4 uppercase tracking-wider">Apps</h2>
             <Button 
               variant="ghost" 
-              className="w-full justify-start font-normal" 
-              onClick={() => {
-                setActiveFilter("all");
-                setIsMobileMenuOpen(false);
-              }}
+              className="flex items-center justify-start text-[#1A1A1A] font-medium w-full py-2 px-3 mb-1 rounded-lg hover:bg-gray-100"
             >
-              <InboxIcon className="h-4 w-4 mr-2" />
-              <span>All</span>
-              <span className="ml-auto">{alerts.length}</span>
+              <span>Inbox</span>
+              <span className="ml-auto bg-gray-100 px-2 py-0.5 rounded-full text-xs text-gray-600">
+                {filteredAlerts.length}
+              </span>
             </Button>
-            <Button 
-              variant="ghost" 
-              className={cn(
-                "w-full justify-start font-normal",
-                activeFilter === "high" && "bg-red-500/10 text-red-400"
-              )}
-              onClick={() => {
-                setActiveFilter("high");
-                setIsMobileMenuOpen(false);
-              }}
-            >
-              <AlertTriangle className="h-4 w-4 mr-2 text-red-500" />
-              <span>High Priority</span>
-              <span className="ml-auto">{alerts.filter(a => a.priority === "high").length}</span>
-            </Button>
-            <Button 
-              variant="ghost" 
-              className={cn(
-                "w-full justify-start font-normal",
-                activeFilter === "medium" && "bg-amber-500/10 text-amber-400"
-              )}
-              onClick={() => {
-                setActiveFilter("medium");
-                setIsMobileMenuOpen(false);
-              }}
-            >
-              <Clock className="h-4 w-4 mr-2 text-amber-500" />
-              <span>Medium</span>
-              <span className="ml-auto">{alerts.filter(a => a.priority === "medium").length}</span>
-            </Button>
-            <Button 
-              variant="ghost" 
-              className={cn(
-                "w-full justify-start font-normal",
-                activeFilter === "low" && "bg-green-500/10 text-green-400"
-              )}
-              onClick={() => {
-                setActiveFilter("low");
-                setIsMobileMenuOpen(false);
-              }}
-            >
-              <Circle className="h-4 w-4 mr-2 text-green-500" />
-              <span>Low Priority</span>
-              <span className="ml-auto">{alerts.filter(a => a.priority === "low").length}</span>
-            </Button>
-            <div className="pt-4 border-t border-white/10">
-              <Button 
-                variant="ghost" 
-                className="w-full justify-start" 
-                onClick={() => {
-                  setShowHelp(true);
-                  setIsMobileMenuOpen(false);
-                }}
+          </div>
+        </aside>
+
+        <div className="flex flex-1">
+          {/* Message List */}
+          <div className="w-full md:w-1/2 lg:w-2/5 xl:w-1/3 border-r border-gray-200 overflow-auto">
+            <div className="border-b border-gray-200 py-4 px-6">
+              <h2 className="text-lg font-medium text-gray-800">Messages</h2>
+            </div>
+            
+            {filteredAlerts.map(alert => (
+              <div 
+                key={alert.id}
+                className={cn(
+                  "border-b border-gray-100 py-6 px-6 cursor-pointer hover:bg-gray-50 transition-colors",
+                  selectedAlert?.id === alert.id ? "bg-gray-50" : "bg-white"
+                )}
+                onClick={() => setSelectedAlert(alert)}
               >
-                <span>Keyboard Shortcuts</span>
-              </Button>
-              <Link to="/" className="block mt-2">
-                <Button variant="ghost" className="w-full justify-start">
-                  <ArrowLeft className="h-4 w-4 mr-2" />
-                  <span>Back to Home</span>
-                </Button>
-              </Link>
-            </div>
+                <div className="flex items-center justify-between mb-1">
+                  <div className="text-sm text-gray-500">{alert.service}</div>
+                  <div className="text-xs text-gray-400">{formatTimeAgo(alert.timestamp)}</div>
+                </div>
+                <h3 className="font-medium text-base mb-1.5">{alert.title}</h3>
+                <p className="text-sm text-gray-600 line-clamp-2">
+                  {alert.description}
+                </p>
+                <div className="flex mt-3">
+                  <span className="text-xs px-2 py-0.5 rounded-full border border-gray-200 text-gray-500 mr-2">
+                    MTTR
+                  </span>
+                  <span className="text-xs px-2 py-0.5 rounded-full border border-gray-200 text-gray-500">
+                    MTTA
+                  </span>
+                  <Button 
+                    variant="ghost" 
+                    size="sm" 
+                    className="ml-auto text-xs bg-transparent hover:bg-gray-100 px-3 py-1 h-auto rounded-md"
+                  >
+                    Discuss
+                  </Button>
+                </div>
+              </div>
+            ))}
           </div>
-        </div>
-      )}
 
-      {/* Main content */}
-      <div className="flex flex-1 pt-16">
-        {/* Left sidebar - hidden on mobile */}
-        <div className="hidden sm:block w-48 border-r border-white/10 p-4 h-[calc(100vh-64px)]">
-          <div className="space-y-1">
-            <Button 
-              variant="ghost" 
-              className="w-full justify-start font-normal" 
-              onClick={() => setActiveFilter("all")}
-            >
-              <InboxIcon className="h-4 w-4 mr-2" />
-              <span>All</span>
-              <span className="ml-auto">{alerts.length}</span>
-            </Button>
-            <Button 
-              variant="ghost" 
-              className={cn(
-                "w-full justify-start font-normal",
-                activeFilter === "high" && "bg-red-500/10 text-red-400"
-              )}
-              onClick={() => setActiveFilter("high")}
-            >
-              <AlertTriangle className="h-4 w-4 mr-2 text-red-500" />
-              <span>High Priority</span>
-              <span className="ml-auto">{alerts.filter(a => a.priority === "high").length}</span>
-            </Button>
-            <Button 
-              variant="ghost" 
-              className={cn(
-                "w-full justify-start font-normal",
-                activeFilter === "medium" && "bg-amber-500/10 text-amber-400"
-              )}
-              onClick={() => setActiveFilter("medium")}
-            >
-              <Clock className="h-4 w-4 mr-2 text-amber-500" />
-              <span>Medium</span>
-              <span className="ml-auto">{alerts.filter(a => a.priority === "medium").length}</span>
-            </Button>
-            <Button 
-              variant="ghost" 
-              className={cn(
-                "w-full justify-start font-normal",
-                activeFilter === "low" && "bg-green-500/10 text-green-400"
-              )}
-              onClick={() => setActiveFilter("low")}
-            >
-              <Circle className="h-4 w-4 mr-2 text-green-500" />
-              <span>Low Priority</span>
-              <span className="ml-auto">{alerts.filter(a => a.priority === "low").length}</span>
-            </Button>
-          </div>
-        </div>
+          {/* Message Detail */}
+          {selectedAlert ? (
+            <div className="hidden md:block flex-1 bg-white overflow-auto p-8">
+              <div className="max-w-3xl">
+                <div className="flex items-center mb-6">
+                  <div className="h-10 w-10 rounded-full bg-gray-100 flex items-center justify-center text-gray-500 font-medium">
+                    {selectedAlert.service.slice(0, 2).toUpperCase()}
+                  </div>
+                  <div className="ml-3">
+                    <div className="font-medium">{selectedAlert.service}</div>
+                    <div className="text-sm text-gray-500">Status: <span className="capitalize">{selectedAlert.status}</span></div>
+                  </div>
+                  <Button variant="ghost" size="icon" className="ml-auto rounded-full">
+                    <MoreVertical className="h-5 w-5" />
+                  </Button>
+                </div>
 
-        {/* Alert list - conditionally shown on mobile */}
-        <div className={cn(
-          "w-full sm:w-1/3 border-r border-white/10 h-[calc(100vh-64px)] overflow-y-auto",
-          mobileView === "detail" && "hidden sm:block"
-        )}>
-          <div className="p-2 border-b border-white/10 sticky top-0 bg-background/80 backdrop-blur-md flex justify-between items-center">
-            <span className="text-sm text-muted-foreground">
-              {filteredAlerts.length} alert{filteredAlerts.length !== 1 ? 's' : ''}
-            </span>
-            <div className="flex items-center">
-              <Button variant="ghost" size="sm" className="text-muted-foreground">
-                <Filter className="h-3.5 w-3.5 mr-1" />
-                <span className="text-xs">Filter</span>
-              </Button>
-              <Button variant="ghost" size="sm" className="text-muted-foreground ml-2">
-                <ChevronDown className="h-3.5 w-3.5" />
-              </Button>
-            </div>
-          </div>
-          
-          {filteredAlerts.length === 0 ? (
-            <div className="flex flex-col items-center justify-center h-64 text-muted-foreground p-6">
-              <Bell className="h-12 w-12 mb-4 opacity-20" />
-              <p className="text-lg font-medium">No alerts found</p>
-              <p className="text-sm">Any new incidents will appear here</p>
+                <h1 className="text-2xl font-semibold mb-4">{selectedAlert.title}</h1>
+
+                <div className="flex flex-wrap gap-3 mb-6">
+                  <Button 
+                    variant="outline" 
+                    className="flex items-center justify-center bg-white hover:bg-gray-50 text-gray-800 border border-gray-200 rounded-lg shadow-sm"
+                    onClick={() => handleAction("do")}
+                  >
+                    <Check className="h-5 w-5 mr-2 text-green-500" />
+                    <span>Do</span>
+                  </Button>
+                  <Button 
+                    variant="outline" 
+                    className="flex items-center justify-center bg-white hover:bg-gray-50 text-gray-800 border border-gray-200 rounded-lg shadow-sm"
+                    onClick={() => handleAction("defer")}
+                  >
+                    <Clock className="h-5 w-5 mr-2 text-amber-500" />
+                    <span>Defer</span>
+                  </Button>
+                  <Button 
+                    variant="outline" 
+                    className="flex items-center justify-center bg-white hover:bg-gray-50 text-gray-800 border border-gray-200 rounded-lg shadow-sm"
+                    onClick={() => handleAction("delegate")}
+                  >
+                    <UserPlus className="h-5 w-5 mr-2 text-blue-500" />
+                    <span>Delegate</span>
+                  </Button>
+                  <Button 
+                    variant="outline" 
+                    className="flex items-center justify-center bg-white hover:bg-gray-50 text-gray-800 border border-gray-200 rounded-lg shadow-sm"
+                    onClick={() => handleAction("delete")}
+                  >
+                    <Trash2 className="h-5 w-5 mr-2 text-rose-500" />
+                    <span>Delete</span>
+                  </Button>
+                </div>
+
+                <div className="flex items-center mb-4">
+                  <Tag className="h-4 w-4 mr-2 text-gray-400" />
+                  <Button variant="ghost" size="sm" className="text-sm text-gray-500 hover:bg-gray-50 px-2 py-1 h-auto">
+                    Labels
+                  </Button>
+                </div>
+
+                <div className="bg-gray-50 rounded-xl p-6 text-gray-700 mb-6">
+                  {selectedAlert.description}
+                </div>
+              </div>
             </div>
           ) : (
-            filteredAlerts.map((alert) => (
-              <AlertItem
-                key={alert.id}
-                alert={alert}
-                isSelected={selectedAlert?.id === alert.id}
-                onClick={() => handleSelectAlert(alert)}
-              />
-            ))
+            <div className="hidden md:flex flex-1 items-center justify-center text-gray-400">
+              <div className="text-center">
+                <p className="text-lg font-medium mb-2">No message selected</p>
+                <p className="text-sm">Select a message from the list to view details</p>
+              </div>
+            </div>
           )}
         </div>
-
-        {/* Alert details - conditionally shown on mobile */}
-        {selectedAlert ? (
-          <div className={cn(
-            "flex-1 h-[calc(100vh-64px)] overflow-y-auto",
-            mobileView === "list" && "hidden sm:block"
-          )}>
-            {mobileView === "detail" && (
-              <div className="p-2 border-b border-white/10 sticky top-0 bg-background/80 backdrop-blur-md sm:hidden">
-                <Button 
-                  variant="ghost" 
-                  size="sm" 
-                  className="text-muted-foreground"
-                  onClick={handleBackToList}
-                >
-                  <Back className="h-4 w-4 mr-1" />
-                  <span className="text-xs">Back to list</span>
-                </Button>
-              </div>
-            )}
-            <AlertDetail
-              alert={selectedAlert}
-              onAction={(action) => handleAction(selectedAlert.id, action)}
-            />
-          </div>
-        ) : (
-          <div className={cn(
-            "flex-1 flex items-center justify-center text-muted-foreground",
-            mobileView === "list" && "hidden sm:block"
-          )}>
-            <div className="text-center">
-              <Bell className="h-16 w-16 mx-auto mb-4 opacity-20" />
-              <p className="text-xl font-medium">No alert selected</p>
-              <p className="text-sm">Select an alert from the list to view details</p>
-            </div>
-          </div>
-        )}
       </div>
-
-      {/* Keyboard shortcut help */}
-      {showHelp && (
-        <div className="fixed inset-0 bg-black/80 backdrop-blur-sm z-50 flex items-center justify-center">
-          <div className="bg-secondary p-6 rounded-lg max-w-md w-full mx-4">
-            <div className="flex justify-between items-center mb-4">
-              <h2 className="text-xl font-bold">Keyboard Shortcuts</h2>
-              <Button variant="ghost" size="icon" onClick={() => setShowHelp(false)}>
-                <X className="h-5 w-5" />
-              </Button>
-            </div>
-            <div className="grid grid-cols-2 gap-y-3 text-sm">
-              <div>⬆ / k</div>
-              <div>Previous alert</div>
-              <div>⬇ / j</div>
-              <div>Next alert</div>
-              <div>e</div>
-              <div>Do (Acknowledge)</div>
-              <div>s</div>
-              <div>Defer alert</div>
-              <div>d</div>
-              <div>Delegate alert</div>
-              <div>#</div>
-              <div>Delete alert</div>
-              <div>Ctrl+K</div>
-              <div>Focus search</div>
-              <div>?</div>
-              <div>Show/hide shortcuts</div>
-            </div>
-          </div>
-        </div>
-      )}
     </div>
   );
 };
