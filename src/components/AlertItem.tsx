@@ -96,13 +96,13 @@ const AlertItem = ({ alert, isSelected, onClick, formatTimeAgo, onAction }: Aler
           <Button 
             variant="outline" 
             size="sm" 
-            className="flex items-center gap-1.5 text-xs text-gray-700"
+            className="flex items-center gap-1.5 text-xs bg-blue-50 text-blue-700 hover:bg-blue-100 border-blue-200"
             onClick={(e) => {
               e.stopPropagation();
               onAction(alert.id, "discuss");
             }}
           >
-            <MessageCircle className="h-3.5 w-3.5 text-gray-700" />
+            <MessageCircle className="h-3.5 w-3.5 text-blue-700" />
             Discuss
           </Button>
         </div>
