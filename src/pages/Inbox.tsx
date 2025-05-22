@@ -1,6 +1,6 @@
 
 import { useState } from "react";
-import { Search } from "lucide-react";
+import { Search, Check, Clock, UserPlus, Trash2, Cat } from "lucide-react";
 import { Input } from "@/components/ui/input";
 import { cn } from "@/lib/utils";
 import { useToast } from "@/hooks/use-toast";
@@ -23,36 +23,79 @@ export interface Alert {
 
 type FilterType = "active" | "acknowledged" | "resolved" | "delegated" | "deferred" | "deleted" | "done";
 
+// Create stub data for each category
+const createStubData = () => {
+  const baseAlerts = [...mockAlerts];
+  
+  // Create alerts for each category
+  const acknowledgedAlerts = baseAlerts.slice(0, 2).map(alert => ({
+    ...alert,
+    id: `acknowledged-${alert.id}`,
+    status: "acknowledged" as Status,
+    title: `In Progress: ${alert.title}`,
+  }));
+  
+  const deferredAlerts = baseAlerts.slice(2, 4).map(alert => ({
+    ...alert,
+    id: `deferred-${alert.id}`,
+    status: "active" as Status,
+    title: `Deferred: ${alert.title}`,
+  }));
+  
+  const delegatedAlerts = baseAlerts.slice(1, 3).map(alert => ({
+    ...alert,
+    id: `delegated-${alert.id}`,
+    status: "active" as Status,
+    title: `Delegated: ${alert.title}`,
+  }));
+  
+  const doneAlerts = baseAlerts.slice(3, 5).map(alert => ({
+    ...alert,
+    id: `done-${alert.id}`,
+    status: "resolved" as Status,
+    title: `Completed: ${alert.title}`,
+  }));
+  
+  const deletedAlerts = baseAlerts.slice(4, 6).map(alert => ({
+    ...alert,
+    id: `deleted-${alert.id}`,
+    status: "resolved" as Status,
+    title: `Deleted: ${alert.title}`,
+  }));
+  
+  return {
+    active: baseAlerts.filter(alert => alert.status === "active"),
+    acknowledged: acknowledgedAlerts,
+    deferred: deferredAlerts,
+    delegated: delegatedAlerts,
+    done: doneAlerts,
+    deleted: deletedAlerts,
+  };
+};
+
+const allAlertCategories = createStubData();
+
 const Inbox = () => {
-  const [alerts, setAlerts] = useState<Alert[]>(mockAlerts);
+  const [activeFilter, setActiveFilter] = useState<FilterType>("active");
   const [selectedAlert, setSelectedAlert] = useState<Alert | null>(null);
   const [searchQuery, setSearchQuery] = useState("");
-  const [activeFilter, setActiveFilter] = useState<FilterType>("active");
   const { toast } = useToast();
   
+  // Use the appropriate alert category based on the active filter
+  const alerts = allAlertCategories[activeFilter as keyof typeof allAlertCategories] || [];
+  
   const filteredAlerts = alerts.filter(alert => {
-    // First apply text search
-    const matchesSearch = 
-      alert.title.toLowerCase().includes(searchQuery.toLowerCase()) ||
+    // Apply text search
+    return alert.title.toLowerCase().includes(searchQuery.toLowerCase()) ||
       alert.description.toLowerCase().includes(searchQuery.toLowerCase());
-    
-    // Then apply status filter
-    const matchesFilter = 
-      alert.status === activeFilter;
-    
-    return matchesSearch && matchesFilter;
   });
 
   const handleAction = (alertId: string, action: "do" | "defer" | "delegate" | "delete" | "discuss") => {
     let actionMessage = "";
-    let updatedAlerts = [...alerts];
     
     switch (action) {
       case "do":
         actionMessage = "Decided to do";
-        updatedAlerts = updatedAlerts.map(alert => 
-          alert.id === alertId ? { ...alert, status: "acknowledged" as Status } : alert
-        );
         break;
       case "defer":
         actionMessage = "Deferred for later";
@@ -62,14 +105,11 @@ const Inbox = () => {
         break;
       case "delete":
         actionMessage = "Deleted";
-        updatedAlerts = updatedAlerts.filter(alert => alert.id !== alertId);
         break;
       case "discuss":
         actionMessage = "Opening discussion";
         break;
     }
-
-    setAlerts(updatedAlerts);
     
     const targetAlert = alerts.find(alert => alert.id === alertId);
     if (targetAlert) {
@@ -120,25 +160,31 @@ const Inbox = () => {
         </div>
       </header>
 
-      {/* Filters */}
+      {/* Filters with icons */}
       <div className="bg-white border-b border-gray-200 px-8 py-4">
         <ToggleGroup type="single" value={activeFilter} onValueChange={(value) => value && setActiveFilter(value as FilterType)}>
-          <ToggleGroupItem value="active" className="rounded-lg text-sm px-5">
+          <ToggleGroupItem value="active" className="rounded-lg text-sm px-5 flex gap-2 items-center">
+            <Cat className="h-4 w-4" />
             Decide
           </ToggleGroupItem>
-          <ToggleGroupItem value="acknowledged" className="rounded-lg text-sm px-5">
+          <ToggleGroupItem value="acknowledged" className="rounded-lg text-sm px-5 flex gap-2 items-center">
+            <Check className="h-4 w-4" />
             Doing
           </ToggleGroupItem>
-          <ToggleGroupItem value="deferred" className="rounded-lg text-sm px-5">
+          <ToggleGroupItem value="deferred" className="rounded-lg text-sm px-5 flex gap-2 items-center">
+            <Clock className="h-4 w-4" />
             Deferred
           </ToggleGroupItem>
-          <ToggleGroupItem value="delegated" className="rounded-lg text-sm px-5">
+          <ToggleGroupItem value="delegated" className="rounded-lg text-sm px-5 flex gap-2 items-center">
+            <UserPlus className="h-4 w-4" />
             Delegated
           </ToggleGroupItem>
-          <ToggleGroupItem value="done" className="rounded-lg text-sm px-5">
+          <ToggleGroupItem value="done" className="rounded-lg text-sm px-5 flex gap-2 items-center">
+            <Check className="h-4 w-4" />
             Done
           </ToggleGroupItem>
-          <ToggleGroupItem value="deleted" className="rounded-lg text-sm px-5">
+          <ToggleGroupItem value="deleted" className="rounded-lg text-sm px-5 flex gap-2 items-center">
+            <Trash2 className="h-4 w-4" />
             Deleted
           </ToggleGroupItem>
         </ToggleGroup>
