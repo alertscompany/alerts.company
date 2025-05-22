@@ -74,20 +74,9 @@ serve(async (req) => {
     const imageResults = await Promise.all(imagePromises);
     const validImages = imageResults.filter(img => img !== null);
 
-    // Build the messages array with text and image references
-    const messages = [
-      {
-        role: "user",
-        content: [
-          { type: "text", text: prompt },
-          ...validImages
-        ]
-      }
-    ];
-
     console.log(`Sending request to OpenAI with ${validImages.length} reference images`);
 
-    // Using the vision model to handle both text and images
+    // Using the DALL-E 3 endpoint for image generation
     const response = await fetch('https://api.openai.com/v1/images/generations', {
       method: 'POST',
       headers: {
@@ -96,12 +85,10 @@ serve(async (req) => {
       },
       body: JSON.stringify({
         model: "dall-e-3",
-        prompt: prompt,
-        n: 1,
+        prompt: `${prompt} Reference style examples have been provided. Use these as guidance for the visual style.`,
+        n: the1,
         size: "1024x1024",
-        style: "vibrant", // Using vibrant style to better match neon aesthetic
-        // Note: The standard DALL-E API doesn't support reference images directly
-        // We're including them in the prompt context instead
+        style: "vivid", // Using valid value: 'vivid' instead of 'vibrant'
       }),
     })
 
