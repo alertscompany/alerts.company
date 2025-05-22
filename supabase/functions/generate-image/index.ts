@@ -43,7 +43,8 @@ serve(async (req) => {
         model: "dall-e-3",
         prompt: prompt,
         n: 1,
-        size: "1024x1024"
+        size: "1024x1024",
+        style: "vibrant" // Using vibrant style to better match neon aesthetic
       }),
     })
 
