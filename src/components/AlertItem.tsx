@@ -39,10 +39,10 @@ const AlertItem = ({ alert, isSelected, onClick, formatTimeAgo, onAction }: Aler
                 <MoreHorizontal className="h-5 w-5 text-gray-500" />
               </button>
             </DropdownMenuTrigger>
-            <DropdownMenuContent className="w-48">
+            <DropdownMenuContent className="w-48 bg-white border border-gray-200 shadow-lg">
               <DropdownMenuItem onClick={() => onAction(alert.id, "do")}>
                 <Check className="mr-2 h-4 w-4 text-green-500" />
-                <span>Do</span>
+                <span>Decide</span>
               </DropdownMenuItem>
               <DropdownMenuItem onClick={() => onAction(alert.id, "defer")}>
                 <Clock className="mr-2 h-4 w-4 text-amber-500" />

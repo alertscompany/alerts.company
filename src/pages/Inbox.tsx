@@ -21,7 +21,7 @@ export interface Alert {
   description: string;
 }
 
-type FilterType = "all" | "active" | "acknowledged" | "resolved";
+type FilterType = "all" | "active" | "acknowledged" | "resolved" | "delegated" | "deleted";
 
 const Inbox = () => {
   const [alerts, setAlerts] = useState<Alert[]>(mockAlerts);
@@ -50,7 +50,7 @@ const Inbox = () => {
     
     switch (action) {
       case "do":
-        actionMessage = "Marked as done";
+        actionMessage = "Decided to do";
         updatedAlerts = updatedAlerts.map(alert => 
           alert.id === alertId ? { ...alert, status: "acknowledged" as Status } : alert
         );
@@ -125,13 +125,19 @@ const Inbox = () => {
             All
           </ToggleGroupItem>
           <ToggleGroupItem value="active" className="rounded-lg text-sm px-5">
-            Active
+            Decide
           </ToggleGroupItem>
           <ToggleGroupItem value="acknowledged" className="rounded-lg text-sm px-5">
-            In Progress
+            Doing
           </ToggleGroupItem>
-          <ToggleGroupItem value="resolved" className="rounded-lg text-sm px-5">
-            Resolved
+          <ToggleGroupItem value="deferred" className="rounded-lg text-sm px-5">
+            Deferred
+          </ToggleGroupItem>
+          <ToggleGroupItem value="delegated" className="rounded-lg text-sm px-5">
+            Delegated
+          </ToggleGroupItem>
+          <ToggleGroupItem value="deleted" className="rounded-lg text-sm px-5">
+            Deleted
           </ToggleGroupItem>
         </ToggleGroup>
       </div>
