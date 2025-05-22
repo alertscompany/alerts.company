@@ -21,7 +21,7 @@ export interface Alert {
   description: string;
 }
 
-type FilterType = "all" | "active" | "acknowledged" | "resolved" | "delegated" | "deleted";
+type FilterType = "all" | "active" | "acknowledged" | "resolved" | "delegated" | "deferred" | "deleted" | "done";
 
 const Inbox = () => {
   const [alerts, setAlerts] = useState<Alert[]>(mockAlerts);
@@ -135,6 +135,9 @@ const Inbox = () => {
           </ToggleGroupItem>
           <ToggleGroupItem value="delegated" className="rounded-lg text-sm px-5">
             Delegated
+          </ToggleGroupItem>
+          <ToggleGroupItem value="done" className="rounded-lg text-sm px-5">
+            Done
           </ToggleGroupItem>
           <ToggleGroupItem value="deleted" className="rounded-lg text-sm px-5">
             Deleted
