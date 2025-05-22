@@ -1,4 +1,3 @@
-
 import { useState } from "react";
 import { Search, Check, Clock, UserPlus, Trash2, Cat } from "lucide-react";
 import { Input } from "@/components/ui/input";
@@ -7,6 +6,7 @@ import { useToast } from "@/hooks/use-toast";
 import { mockAlerts } from "@/data/mockAlerts";
 import AlertItem from "@/components/AlertItem";
 import { ToggleGroup, ToggleGroupItem } from "@/components/ui/toggle-group";
+import HeroCard from "@/components/HeroCard";
 
 export type Priority = "high" | "medium" | "low";
 export type Status = "active" | "acknowledged" | "resolved";
@@ -192,6 +192,9 @@ const Inbox = () => {
 
       {/* Message Stream - Slack Block Kit Style */}
       <div className="container mx-auto max-w-4xl py-4">
+        {/* Hero Card */}
+        <HeroCard activeFilter={activeFilter} />
+        
         {filteredAlerts.length > 0 ? (
           <div className="space-y-4">
             {filteredAlerts.map(alert => (
