@@ -21,13 +21,13 @@ export interface Alert {
   description: string;
 }
 
-type FilterType = "all" | "active" | "acknowledged" | "resolved" | "delegated" | "deferred" | "deleted" | "done";
+type FilterType = "active" | "acknowledged" | "resolved" | "delegated" | "deferred" | "deleted" | "done";
 
 const Inbox = () => {
   const [alerts, setAlerts] = useState<Alert[]>(mockAlerts);
   const [selectedAlert, setSelectedAlert] = useState<Alert | null>(null);
   const [searchQuery, setSearchQuery] = useState("");
-  const [activeFilter, setActiveFilter] = useState<FilterType>("all");
+  const [activeFilter, setActiveFilter] = useState<FilterType>("active");
   const { toast } = useToast();
   
   const filteredAlerts = alerts.filter(alert => {
@@ -38,13 +38,12 @@ const Inbox = () => {
     
     // Then apply status filter
     const matchesFilter = 
-      activeFilter === "all" || 
       alert.status === activeFilter;
     
     return matchesSearch && matchesFilter;
   });
 
-  const handleAction = (alertId: string, action: "do" | "defer" | "delegate" | "delete") => {
+  const handleAction = (alertId: string, action: "do" | "defer" | "delegate" | "delete" | "discuss") => {
     let actionMessage = "";
     let updatedAlerts = [...alerts];
     
@@ -64,6 +63,9 @@ const Inbox = () => {
       case "delete":
         actionMessage = "Deleted";
         updatedAlerts = updatedAlerts.filter(alert => alert.id !== alertId);
+        break;
+      case "discuss":
+        actionMessage = "Opening discussion";
         break;
     }
 
@@ -121,9 +123,6 @@ const Inbox = () => {
       {/* Filters */}
       <div className="bg-white border-b border-gray-200 px-8 py-4">
         <ToggleGroup type="single" value={activeFilter} onValueChange={(value) => value && setActiveFilter(value as FilterType)}>
-          <ToggleGroupItem value="all" className="rounded-lg text-sm px-5">
-            All
-          </ToggleGroupItem>
           <ToggleGroupItem value="active" className="rounded-lg text-sm px-5">
             Decide
           </ToggleGroupItem>
