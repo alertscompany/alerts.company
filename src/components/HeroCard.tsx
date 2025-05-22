@@ -52,7 +52,7 @@ const HeroCard = ({ activeFilter }: HeroCardProps) => {
 
   return (
     <div className="fixed top-24 left-8 z-10">
-      <Avatar className="h-20 w-20 border-4 border-white shadow-xl">
+      <Avatar className="h-40 w-40 border-4 border-white shadow-xl">
         <AvatarImage
           src={getImageForCategory()}
           alt={`${getCategoryTitle()} category icon`}
