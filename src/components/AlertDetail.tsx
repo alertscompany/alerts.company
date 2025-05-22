@@ -13,11 +13,11 @@ const AlertDetail = ({ alert, onAction }: AlertDetailProps) => {
   const getPriorityIcon = (priority: Priority) => {
     switch (priority) {
       case "high":
-        return <AlertTriangle className="h-5 w-5 text-red-500" />;
+        return <AlertTriangle className="h-5 w-5 text-rose-500" />;
       case "medium":
         return <Clock className="h-5 w-5 text-amber-500" />;
       case "low":
-        return <CheckCircle className="h-5 w-5 text-green-500" />;
+        return <CheckCircle className="h-5 w-5 text-emerald-500" />;
       default:
         return null;
     }
@@ -32,92 +32,95 @@ const AlertDetail = ({ alert, onAction }: AlertDetailProps) => {
       day: 'numeric',
       hour: 'numeric',
       minute: 'numeric',
-      second: 'numeric',
       hour12: true
     });
   };
 
   return (
-    <div className="p-4 sm:p-6 max-w-3xl mx-auto">
+    <div className="p-6 sm:p-8 max-w-3xl mx-auto">
       {/* Alert header */}
-      <div className="flex items-center mb-1">
+      <div className="flex items-center mb-2">
         {getPriorityIcon(alert.priority)}
-        <span className={cn("text-xs font-medium ml-2 px-2 py-0.5 rounded-full", 
-          alert.priority === "high" ? "bg-red-500/20 text-red-500" : 
-          alert.priority === "medium" ? "bg-amber-500/20 text-amber-500" : 
-          "bg-green-500/20 text-green-500"
+        <span className={cn("text-xs font-medium ml-2 px-2.5 py-1 rounded-full", 
+          alert.priority === "high" ? "bg-rose-50 text-rose-600" : 
+          alert.priority === "medium" ? "bg-amber-50 text-amber-600" : 
+          "bg-emerald-50 text-emerald-600"
         )}>
           {alert.priority.toUpperCase()} PRIORITY
         </span>
-        <span className="text-xs text-muted-foreground ml-auto">
+        <span className="text-xs text-gray-500 ml-auto">
           {renderTimestamp(alert.timestamp)}
         </span>
       </div>
 
       {/* Alert title */}
-      <h1 className="text-xl sm:text-2xl font-semibold mb-4">{alert.title}</h1>
+      <h1 className="text-2xl sm:text-3xl font-semibold mb-4 text-gray-900">Piyush loves this</h1>
       
       {/* Service info */}
       <div className="mb-6 flex items-center">
-        <div className="h-8 w-8 bg-secondary rounded-full flex items-center justify-center text-xs font-medium">
+        <div className="h-10 w-10 bg-gray-100 rounded-full flex items-center justify-center text-sm font-medium text-gray-700">
           {alert.service.slice(0, 2).toUpperCase()}
         </div>
         <div className="ml-3">
-          <p className="font-medium">{alert.service}</p>
-          <p className="text-xs text-muted-foreground">Status: <span className="capitalize">{alert.status}</span></p>
+          <p className="font-medium text-gray-900">{alert.service}</p>
+          <p className="text-sm text-gray-500">Status: <span className="capitalize">{alert.status}</span></p>
         </div>
       </div>
 
       {/* Alert description */}
-      <div className="rounded-lg mb-8 whitespace-pre-line text-sm">
+      <div className="rounded-2xl bg-white p-6 mb-8 shadow-sm border border-gray-100 whitespace-pre-line text-gray-700">
         {alert.description}
       </div>
 
       {/* Action toolbar */}
-      <div className="border-t border-white/10 pt-4">
-        <div className="grid grid-cols-2 sm:grid-cols-4 gap-2 sm:gap-3 w-full">
+      <div className="border-t border-gray-100 pt-6">
+        <div className="grid grid-cols-2 sm:grid-cols-5 gap-3">
           <Button 
             onClick={() => onAction("do")} 
-            className="flex flex-col gap-1 h-auto py-3"
-            variant="ghost"
-            size="sm"
+            className="flex flex-col items-center gap-1.5 h-auto py-4 bg-white hover:bg-gray-50 text-gray-800 border border-gray-200 rounded-xl shadow-sm"
+            variant="outline"
           >
-            <CheckCircle className="h-5 w-5" />
-            <span className="text-xs">Do (E)</span>
+            <CheckCircle className="h-5 w-5 text-emerald-500" />
+            <span className="text-sm font-medium">Do (E)</span>
           </Button>
           <Button 
             onClick={() => onAction("defer")} 
-            className="flex flex-col gap-1 h-auto py-3"
-            variant="ghost"
-            size="sm"
+            className="flex flex-col items-center gap-1.5 h-auto py-4 bg-white hover:bg-gray-50 text-gray-800 border border-gray-200 rounded-xl shadow-sm"
+            variant="outline"
           >
-            <Clock className="h-5 w-5" />
-            <span className="text-xs">Defer (S)</span>
+            <Clock className="h-5 w-5 text-amber-500" />
+            <span className="text-sm font-medium">Defer (S)</span>
           </Button>
           <Button 
             onClick={() => onAction("delegate")} 
-            className="flex flex-col gap-1 h-auto py-3"
-            variant="ghost"
-            size="sm"
+            className="flex flex-col items-center gap-1.5 h-auto py-4 bg-white hover:bg-gray-50 text-gray-800 border border-gray-200 rounded-xl shadow-sm"
+            variant="outline"
           >
-            <UserPlus className="h-5 w-5" />
-            <span className="text-xs">Delegate (D)</span>
+            <UserPlus className="h-5 w-5 text-blue-500" />
+            <span className="text-sm font-medium">Delegate (D)</span>
+          </Button>
+          <Button 
+            onClick={() => onAction("archive")} 
+            className="flex flex-col items-center gap-1.5 h-auto py-4 bg-white hover:bg-gray-50 text-gray-800 border border-gray-200 rounded-xl shadow-sm"
+            variant="outline"
+          >
+            <Archive className="h-5 w-5 text-gray-500" />
+            <span className="text-sm font-medium">Archive (A)</span>
           </Button>
           <Button 
             onClick={() => onAction("delete")} 
-            className="flex flex-col gap-1 h-auto py-3"
-            variant="ghost"
-            size="sm"
+            className="flex flex-col items-center gap-1.5 h-auto py-4 bg-white hover:bg-gray-50 text-gray-800 border border-gray-200 rounded-xl shadow-sm"
+            variant="outline"
           >
-            <Trash2 className="h-5 w-5" />
-            <span className="text-xs">Delete (#)</span>
+            <Trash2 className="h-5 w-5 text-rose-500" />
+            <span className="text-sm font-medium">Delete (#)</span>
           </Button>
         </div>
       </div>
 
-      {/* Keyboard shortcut hint - hide on very small screens */}
-      <div className="mt-6 text-center hidden sm:block">
-        <p className="text-xs text-muted-foreground">Press <kbd className="px-1.5 py-0.5 bg-secondary rounded text-xs">?</kbd> to view all keyboard shortcuts</p>
+      {/* Keyboard shortcut hint */}
+      <div className="mt-6 text-center">
+        <p className="text-xs text-gray-500">Press <kbd className="px-1.5 py-0.5 bg-gray-100 rounded text-xs border border-gray-200">?</kbd> to view all keyboard shortcuts</p>
       </div>
     </div>
   );
