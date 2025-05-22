@@ -1,12 +1,13 @@
 
 import { useState } from "react";
-import { Search, Check, Clock, UserPlus, Trash2, Cat } from "lucide-react";
+import { Search, Check, Clock, UserPlus, Trash2, Cat, Wrench } from "lucide-react";
 import { Input } from "@/components/ui/input";
 import { cn } from "@/lib/utils";
 import { useToast } from "@/hooks/use-toast";
 import { mockAlerts } from "@/data/mockAlerts";
 import AlertItem from "@/components/AlertItem";
 import { ToggleGroup, ToggleGroupItem } from "@/components/ui/toggle-group";
+import { Badge } from "@/components/ui/badge";
 
 export type Priority = "high" | "medium" | "low";
 export type Status = "active" | "acknowledged" | "resolved";
@@ -21,7 +22,7 @@ export interface Alert {
   description: string;
 }
 
-type FilterType = "active" | "acknowledged" | "resolved" | "delegated" | "deferred" | "deleted" | "done";
+type FilterType = "active" | "acknowledged" | "deferred" | "delegated" | "done" | "deleted";
 
 // Create stub data for each category
 const createStubData = () => {
@@ -74,6 +75,16 @@ const createStubData = () => {
 };
 
 const allAlertCategories = createStubData();
+
+// Images for each category
+const categoryImages = {
+  active: "/lovable-uploads/474476b2-7d7e-4afe-9a13-e540684078d0.png", // Decide
+  acknowledged: "/lovable-uploads/84b9adfc-fcad-4ea8-947c-6a6a06b01d4c.png", // Do
+  deferred: "/lovable-uploads/aa9ec1e0-5e87-442b-8d04-79e636bdc487.png", // Defer
+  delegated: "/lovable-uploads/37001c3d-d538-47a1-a549-184c13e9af81.png", // Delegate
+  done: "/lovable-uploads/6481b03c-7c82-4797-baf4-45da2dbd4f84.png", // Done
+  deleted: "/lovable-uploads/ff8eefcd-5288-4b6e-a7d7-134598c98dcf.png", // Delete
+};
 
 const Inbox = () => {
   const [activeFilter, setActiveFilter] = useState<FilterType>("active");
@@ -142,6 +153,18 @@ const Inbox = () => {
     setSelectedAlert(alert.id === selectedAlert?.id ? null : alert);
   };
 
+  const getCategoryName = (filterType: FilterType) => {
+    switch (filterType) {
+      case "active": return "Decide";
+      case "acknowledged": return "Do";
+      case "deferred": return "Defer";
+      case "delegated": return "Delegate";
+      case "done": return "Done";
+      case "deleted": return "Delete";
+      default: return filterType;
+    }
+  };
+
   return (
     <div className="min-h-screen bg-[#F9FAFB] text-[#1A1A1A]">
       {/* Header */}
@@ -160,33 +183,29 @@ const Inbox = () => {
         </div>
       </header>
 
-      {/* Filters with icons */}
+      {/* Category Tabs with Images */}
       <div className="bg-white border-b border-gray-200 px-8 py-4">
         <ToggleGroup type="single" value={activeFilter} onValueChange={(value) => value && setActiveFilter(value as FilterType)}>
-          <ToggleGroupItem value="active" className="rounded-lg text-sm px-5 flex gap-2 items-center">
-            <Cat className="h-4 w-4" />
-            Decide
-          </ToggleGroupItem>
-          <ToggleGroupItem value="acknowledged" className="rounded-lg text-sm px-5 flex gap-2 items-center">
-            <Check className="h-4 w-4" />
-            Doing
-          </ToggleGroupItem>
-          <ToggleGroupItem value="deferred" className="rounded-lg text-sm px-5 flex gap-2 items-center">
-            <Clock className="h-4 w-4" />
-            Deferred
-          </ToggleGroupItem>
-          <ToggleGroupItem value="delegated" className="rounded-lg text-sm px-5 flex gap-2 items-center">
-            <UserPlus className="h-4 w-4" />
-            Delegated
-          </ToggleGroupItem>
-          <ToggleGroupItem value="done" className="rounded-lg text-sm px-5 flex gap-2 items-center">
-            <Check className="h-4 w-4" />
-            Done
-          </ToggleGroupItem>
-          <ToggleGroupItem value="deleted" className="rounded-lg text-sm px-5 flex gap-2 items-center">
-            <Trash2 className="h-4 w-4" />
-            Deleted
-          </ToggleGroupItem>
+          {(Object.keys(categoryImages) as FilterType[]).map((filterType) => (
+            <ToggleGroupItem 
+              key={filterType} 
+              value={filterType} 
+              className="rounded-lg text-sm px-5 flex flex-col gap-1 items-center py-2"
+              aria-label={getCategoryName(filterType)}
+            >
+              <div className="w-12 h-12 relative mb-1">
+                <img 
+                  src={categoryImages[filterType]} 
+                  alt={getCategoryName(filterType)}
+                  className="w-full h-full object-contain"
+                />
+              </div>
+              <span>{getCategoryName(filterType)}</span>
+              <Badge variant="outline" className="text-xs bg-gray-100">
+                {allAlertCategories[filterType].length}
+              </Badge>
+            </ToggleGroupItem>
+          ))}
         </ToggleGroup>
       </div>
 
