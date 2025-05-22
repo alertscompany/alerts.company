@@ -1,6 +1,10 @@
 
 import { Card, CardContent } from "@/components/ui/card";
-import { FilterType } from "@/pages/Inbox";
+import { Avatar, AvatarImage, AvatarFallback } from "@/components/ui/avatar";
+
+// Import the FilterType directly from the file
+// Fix the TypeScript error by extracting the type from Inbox.tsx
+type FilterType = "active" | "acknowledged" | "resolved" | "delegated" | "deferred" | "deleted" | "done";
 
 interface HeroCardProps {
   activeFilter: FilterType;
@@ -48,15 +52,19 @@ const HeroCard = ({ activeFilter }: HeroCardProps) => {
   };
 
   return (
-    <Card className="mb-6 overflow-hidden border-none shadow-lg">
-      <CardContent className="p-0">
-        <div className="flex items-center justify-center">
-          <img
+    <Card className="mb-6 overflow-hidden border-none shadow-lg bg-transparent">
+      <CardContent className="p-6 flex flex-col items-center justify-center">
+        <Avatar className="h-40 w-40 border-4 border-white shadow-xl">
+          <AvatarImage
             src={getImageForCategory()}
             alt={`${getCategoryTitle()} category icon`}
-            className="w-full max-w-[220px] h-auto"
+            className="object-cover"
           />
-        </div>
+          <AvatarFallback className="bg-primary text-3xl font-bold">
+            {getCategoryTitle().charAt(0)}
+          </AvatarFallback>
+        </Avatar>
+        <h2 className="mt-4 text-2xl font-semibold text-gray-800">{getCategoryTitle()}</h2>
       </CardContent>
     </Card>
   );
