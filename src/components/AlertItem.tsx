@@ -22,17 +22,17 @@ const AlertItem = ({ alert, isSelected, onClick, formatTimeAgo, onAction }: Aler
   return (
     <div 
       className={cn(
-        "bg-white rounded-lg border border-gray-200 shadow-sm overflow-hidden",
+        "bg-white rounded-lg border border-gray-200 shadow-sm overflow-hidden mb-3",
         isSelected ? "border-blue-300 ring-1 ring-blue-300" : ""
       )}
       onClick={onClick}
     >
-      {/* Slack-like message header */}
-      <div className="border-l-4 border-blue-500 pl-4 pr-6 py-4">
-        <div className="flex items-center justify-between mb-1">
+      <div className="pl-4 pr-6 py-4">
+        {/* Slack-style header with app name and timestamp */}
+        <div className="flex items-center justify-between mb-2">
           <div className="flex items-center gap-2">
-            <div className="font-medium text-gray-900">{alert.service}</div>
-            <div className="text-xs text-gray-500">{formatTimeAgo(alert.timestamp)}</div>
+            <span className="font-bold text-slate-800">{alert.service}</span>
+            <span className="text-xs text-slate-500">{formatTimeAgo(alert.timestamp)}</span>
           </div>
           <DropdownMenu>
             <DropdownMenuTrigger asChild>
@@ -64,19 +64,19 @@ const AlertItem = ({ alert, isSelected, onClick, formatTimeAgo, onAction }: Aler
           </DropdownMenu>
         </div>
         
-        {/* Message title */}
-        <h3 className="text-base font-bold mb-2">{alert.title}</h3>
+        {/* Message title - more prominent like in Slack */}
+        <h3 className="text-lg font-semibold text-slate-900 mb-1">{alert.title}</h3>
         
-        {/* Message content */}
-        <div className="text-sm text-gray-700 mb-4">
+        {/* Message content - with Slack-like styling */}
+        <div className="text-base text-slate-700 mb-3 font-normal leading-relaxed">
           {alert.description}
         </div>
         
-        {/* Bottom row with status tags and discuss button */}
-        <div className="flex items-center justify-between mt-2">
+        {/* Bottom row with tags and discuss button - Slack style */}
+        <div className="flex items-center justify-between mt-3">
           <div className="flex items-center gap-2">
             <span className={cn(
-              "text-xs px-2.5 py-1 rounded-full font-medium",
+              "text-xs px-2 py-0.5 rounded font-medium",
               alert.status === "active" ? "bg-amber-100 text-amber-800" : 
               alert.status === "acknowledged" ? "bg-blue-100 text-blue-800" : 
               "bg-green-100 text-green-800"
@@ -85,10 +85,10 @@ const AlertItem = ({ alert, isSelected, onClick, formatTimeAgo, onAction }: Aler
               alert.status === "acknowledged" ? "In Progress" : 
               "Resolved"}
             </span>
-            <span className="text-xs px-2.5 py-1 rounded-full bg-gray-100 text-gray-800">
+            <span className="text-xs px-2 py-0.5 rounded bg-gray-100 text-gray-700">
               MTTR: 2h 15m
             </span>
-            <span className="text-xs px-2.5 py-1 rounded-full bg-gray-100 text-gray-800">
+            <span className="text-xs px-2 py-0.5 rounded bg-gray-100 text-gray-700">
               MTTA: 45m
             </span>
           </div>
@@ -96,13 +96,13 @@ const AlertItem = ({ alert, isSelected, onClick, formatTimeAgo, onAction }: Aler
           <Button 
             variant="outline" 
             size="sm" 
-            className="flex items-center gap-1.5 text-xs bg-blue-50 text-blue-700 hover:bg-blue-100 border-blue-200"
+            className="flex items-center gap-1.5 text-xs bg-blue-50 text-blue-600 hover:bg-blue-100 border-blue-200"
             onClick={(e) => {
               e.stopPropagation();
               onAction(alert.id, "discuss");
             }}
           >
-            <MessageCircle className="h-3.5 w-3.5 text-blue-700" />
+            <MessageCircle className="h-3.5 w-3.5 text-blue-600" />
             Discuss
           </Button>
         </div>
