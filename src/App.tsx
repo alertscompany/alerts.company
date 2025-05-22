@@ -8,7 +8,6 @@ import Index from "./pages/Index";
 import NotFound from "./pages/NotFound";
 import Pitch from "./pages/Pitch";
 import Inbox from "./pages/Inbox";
-import CatGenerator from "./pages/CatGenerator";
 
 const queryClient = new QueryClient();
 
@@ -22,7 +21,6 @@ const App = () => (
           <Route path="/" element={<Index />} />
           <Route path="/pitch" element={<Pitch />} />
           <Route path="/inbox" element={<Inbox />} />
-          <Route path="/cat-generator" element={<CatGenerator />} />
           {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
           <Route path="*" element={<NotFound />} />
         </Routes>
