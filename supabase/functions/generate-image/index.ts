@@ -86,7 +86,7 @@ serve(async (req) => {
       body: JSON.stringify({
         model: "dall-e-3",
         prompt: `${prompt} Reference style examples have been provided. Use these as guidance for the visual style.`,
-        n: the1,
+        n: 1,
         size: "1024x1024",
         style: "vivid", // Using valid value: 'vivid' instead of 'vibrant'
       }),
