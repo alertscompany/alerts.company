@@ -1,4 +1,3 @@
-
 import { Bell, X, Brain, Zap, Users, Shield, LineChart, ArrowDown, Cat, ArrowRight } from "lucide-react";
 import RainingLetters from "@/components/RainingLetters";
 import WaitlistForm from "@/components/WaitlistForm";
@@ -87,7 +86,7 @@ const Index = () => {
       <section className="py-12 md:py-16 border-b border-white/5 relative overflow-hidden bg-muted">
         <div className="container mx-auto px-4">
           {isMobile ? (
-            <Carousel className="w-full max-w-xs mx-auto">
+            <Carousel className="w-full max-w-xs mx-auto" autoRotate autoRotateInterval={2000} opts={{ loop: true }}>
               <CarouselContent>
                 {cats.map((cat) => (
                   <CarouselItem key={cat.type} className="flex justify-center">

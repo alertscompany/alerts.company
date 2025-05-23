@@ -1,6 +1,6 @@
 
 import { FC } from "react";
-import { ArrowDown, ArrowRight, Cat, ChevronDown } from "lucide-react";
+import { ArrowDown, Cat, ChevronDown } from "lucide-react";
 import CatCard, { CatType } from "./CatCard";
 import IncidentsImageBox from "./IncidentsImageBox";
 import { useIsMobile } from "@/hooks/use-mobile";

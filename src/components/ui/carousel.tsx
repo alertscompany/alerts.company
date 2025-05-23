@@ -1,3 +1,4 @@
+
 import * as React from "react"
 import useEmblaCarousel, {
   type UseEmblaCarouselType,
@@ -17,6 +18,8 @@ type CarouselProps = {
   plugins?: CarouselPlugin
   orientation?: "horizontal" | "vertical"
   setApi?: (api: CarouselApi) => void
+  autoRotate?: boolean
+  autoRotateInterval?: number
 }
 
 type CarouselContextProps = {
@@ -26,6 +29,8 @@ type CarouselContextProps = {
   scrollNext: () => void
   canScrollPrev: boolean
   canScrollNext: boolean
+  autoRotate?: boolean
+  autoRotateInterval?: number
 } & CarouselProps
 
 const CarouselContext = React.createContext<CarouselContextProps | null>(null)
@@ -52,6 +57,8 @@ const Carousel = React.forwardRef<
       plugins,
       className,
       children,
+      autoRotate = false,
+      autoRotateInterval = 3000,
       ...props
     },
     ref
@@ -60,6 +67,7 @@ const Carousel = React.forwardRef<
       {
         ...opts,
         axis: orientation === "horizontal" ? "x" : "y",
+        loop: autoRotate ? true : opts?.loop,
       },
       plugins
     )
@@ -96,6 +104,21 @@ const Carousel = React.forwardRef<
       [scrollPrev, scrollNext]
     )
 
+    // Setup auto rotation
+    React.useEffect(() => {
+      if (!api || !autoRotate) {
+        return
+      }
+
+      const intervalId = setInterval(() => {
+        api.scrollNext()
+      }, autoRotateInterval)
+
+      return () => {
+        clearInterval(intervalId)
+      }
+    }, [api, autoRotate, autoRotateInterval])
+
     React.useEffect(() => {
       if (!api || !setApi) {
         return
@@ -130,6 +153,8 @@ const Carousel = React.forwardRef<
           scrollNext,
           canScrollPrev,
           canScrollNext,
+          autoRotate,
+          autoRotateInterval,
         }}
       >
         <div
