@@ -17,6 +17,14 @@ const CatHeroSection: FC<CatHeroSectionProps> = ({ scrollToWaitlist }) => {
     { type: "done", imagePath: "/lovable-uploads/d558a30a-4e79-4b02-a23e-bb4d183eb0b5.png" }
   ];
 
+  const scrollToNextSection = () => {
+    // Find the next section element
+    const nextSection = document.querySelector('.py-24.border-b.border-white\\/5:not(.min-h-screen)');
+    if (nextSection) {
+      nextSection.scrollIntoView({ behavior: 'smooth' });
+    }
+  };
+
   return (
     <div className="relative py-24 border-b border-white/5 min-h-screen flex flex-col items-center justify-center bg-gradient-to-b from-background to-muted">
       <div className="container mx-auto px-4 pt-12 flex flex-col items-center">
@@ -40,7 +48,18 @@ const CatHeroSection: FC<CatHeroSectionProps> = ({ scrollToWaitlist }) => {
         </div>
         
         {/* 4. New Glowing Chevron Down */}
-        <div className="mb-20 animate-bounce">
+        <div 
+          className="mb-20 animate-bounce cursor-pointer" 
+          onClick={scrollToNextSection}
+          aria-label="Scroll to next section"
+          role="button"
+          tabIndex={0}
+          onKeyDown={(e) => {
+            if (e.key === 'Enter' || e.key === ' ') {
+              scrollToNextSection();
+            }
+          }}
+        >
           <ChevronDown 
             className="w-10 h-10 text-primary animate-pulse" 
             style={{ 
