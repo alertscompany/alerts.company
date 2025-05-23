@@ -1,5 +1,5 @@
 
-import { Bell, X, Brain, Zap, Users, Shield, LineChart, ArrowDown, Cat } from "lucide-react";
+import { Bell, X, Brain, Zap, Users, Shield, LineChart, ArrowDown, Cat, ArrowRight } from "lucide-react";
 import RainingLetters from "@/components/RainingLetters";
 import WaitlistForm from "@/components/WaitlistForm";
 import { Link } from "react-router-dom";
