@@ -6,6 +6,14 @@ import { Link } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import CatHeroSection from "@/components/CatHeroSection";
 import CatCard, { CatType } from "@/components/CatCard";
+import { useIsMobile } from "@/hooks/use-mobile";
+import { 
+  Carousel,
+  CarouselContent,
+  CarouselItem,
+  CarouselNext,
+  CarouselPrevious 
+} from "@/components/ui/carousel";
 
 const Index = () => {
   const scrollToWaitlist = () => {
@@ -13,6 +21,7 @@ const Index = () => {
     waitlistElement?.scrollIntoView({ behavior: 'smooth' });
   };
 
+  const isMobile = useIsMobile();
   const currentYear = new Date().getFullYear();
 
   const Logo = () => (
@@ -75,29 +84,44 @@ const Index = () => {
       </section>
 
       {/* Cat Cards Section */}
-      <section className="py-16 border-b border-white/5 relative overflow-hidden bg-muted">
+      <section className="py-12 md:py-16 border-b border-white/5 relative overflow-hidden bg-muted">
         <div className="container mx-auto px-4">
-          <div className="flex flex-col md:flex-row items-center justify-center gap-6 max-w-6xl mx-auto">
-            {cats.map((cat, index) => (
-              <div key={cat.type} className="flex items-center">
-                <CatCard 
-                  type={cat.type}
-                  imagePath={cat.imagePath}
-                  className="w-[180px] h-[220px]"
-                />
-                {index < cats.length - 1 && (
-                  <div className="hidden md:flex items-center justify-center mx-2">
-                    <ArrowRight className="w-6 h-6 text-primary animate-pulse" />
-                  </div>
-                )}
-                {index < cats.length - 1 && (
-                  <div className="flex md:hidden items-center justify-center my-2">
-                    <ArrowDown className="w-6 h-6 text-primary animate-pulse" />
-                  </div>
-                )}
+          {isMobile ? (
+            <Carousel className="w-full max-w-xs mx-auto">
+              <CarouselContent>
+                {cats.map((cat) => (
+                  <CarouselItem key={cat.type} className="flex justify-center">
+                    <CatCard 
+                      type={cat.type}
+                      imagePath={cat.imagePath}
+                      className="w-[180px] h-[220px]"
+                    />
+                  </CarouselItem>
+                ))}
+              </CarouselContent>
+              <div className="flex justify-center mt-4">
+                <CarouselPrevious className="relative static mx-2" />
+                <CarouselNext className="relative static mx-2" />
               </div>
-            ))}
-          </div>
+            </Carousel>
+          ) : (
+            <div className="flex flex-row items-center justify-center gap-6 max-w-6xl mx-auto">
+              {cats.map((cat, index) => (
+                <div key={cat.type} className="flex items-center">
+                  <CatCard 
+                    type={cat.type}
+                    imagePath={cat.imagePath}
+                    className="w-[180px] h-[220px]"
+                  />
+                  {index < cats.length - 1 && (
+                    <div className="flex items-center justify-center mx-2">
+                      <ArrowRight className="w-6 h-6 text-primary animate-pulse" />
+                    </div>
+                  )}
+                </div>
+              ))}
+            </div>
+          )}
         </div>
       </section>
 

@@ -3,6 +3,14 @@ import { FC } from "react";
 import { ArrowDown, ArrowRight, Cat, ChevronDown } from "lucide-react";
 import CatCard, { CatType } from "./CatCard";
 import IncidentsImageBox from "./IncidentsImageBox";
+import { useIsMobile } from "@/hooks/use-mobile";
+import { 
+  Carousel,
+  CarouselContent,
+  CarouselItem,
+  CarouselNext,
+  CarouselPrevious 
+} from "@/components/ui/carousel";
 
 interface CatHeroSectionProps {
   scrollToWaitlist: () => void;
@@ -16,6 +24,8 @@ const CatHeroSection: FC<CatHeroSectionProps> = ({ scrollToWaitlist }) => {
     { type: "delegate", imagePath: "/lovable-uploads/9a020476-6444-4e08-9aa5-cd7012c3c5b7.png" },
     { type: "done", imagePath: "/lovable-uploads/d558a30a-4e79-4b02-a23e-bb4d183eb0b5.png" }
   ];
+
+  const isMobile = useIsMobile();
 
   const scrollToNextSection = () => {
     // Find the next section element
@@ -47,7 +57,7 @@ const CatHeroSection: FC<CatHeroSectionProps> = ({ scrollToWaitlist }) => {
           </button>
         </div>
         
-        {/* 4. New Glowing Chevron Down */}
+        {/* 4. Glowing Chevron Down */}
         <div 
           className="mb-20 animate-bounce cursor-pointer" 
           onClick={scrollToNextSection}
