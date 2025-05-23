@@ -2,6 +2,7 @@
 import { FC } from "react";
 import { ArrowDown, ArrowRight, Cat } from "lucide-react";
 import CatCard, { CatType } from "./CatCard";
+import IncidentsImageBox from "./IncidentsImageBox";
 
 interface CatHeroSectionProps {
   scrollToWaitlist: () => void;
@@ -19,6 +20,9 @@ const CatHeroSection: FC<CatHeroSectionProps> = ({ scrollToWaitlist }) => {
   return (
     <div className="relative py-16 border-b border-white/5 min-h-[70vh] flex flex-col items-center justify-center bg-gradient-to-b from-background to-muted">
       <div className="container mx-auto px-4">
+        {/* Add the incidents image box above the title */}
+        <IncidentsImageBox />
+        
         <h1 className="text-4xl md:text-5xl font-bold text-center mb-12 bg-gradient-to-r from-primary via-purple-500 to-primary bg-clip-text text-transparent animate-fade-up">
           <Cat className="inline-block mr-2 mb-1" /> The Alerts Company <Cat className="inline-block ml-2 mb-1 transform -scale-x-100" />
         </h1>
