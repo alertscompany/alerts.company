@@ -1,9 +1,9 @@
-
 import { Bell, X, Brain, Zap, Users, Shield, LineChart, ArrowDown } from "lucide-react";
 import RainingLetters from "@/components/RainingLetters";
 import WaitlistForm from "@/components/WaitlistForm";
 import { Link } from "react-router-dom";
 import { Button } from "@/components/ui/button";
+import CatHeroSection from "@/components/CatHeroSection";
 
 const Index = () => {
   const scrollToWaitlist = () => {
@@ -27,33 +27,13 @@ const Index = () => {
         <div className="container mx-auto px-4 py-6 flex justify-between items-center">
           <Logo />
           <div>
-            {/* <Link to="/pitch">
-              <Button variant="outline" className="border-white/10 hover:bg-primary/10 hover:text-primary">
-                Pitch
-              </Button>
-            </Link>
-            <Link to="/inbox">
-              <Button variant="outline" className="border-white/10 hover:bg-primary/10 hover:text-primary">
-                Inbox
-              </Button>
-            </Link> */}
+            {/* Navigation buttons if needed */}
           </div>
         </div>
       </nav>
 
-      {/* Hero Section with RainingLetters and CTA */}
-      <div className="h-[50vh] relative border-b border-white/5">
-        <RainingLetters showForm={false} />
-        <div className="absolute bottom-8 left-0 right-0 flex justify-center z-30">
-          <button
-            onClick={scrollToWaitlist}
-            className="px-12 py-6 text-xl font-medium text-white rounded-2xl shadow-[0_0_30px_rgba(14,165,233,0.3)] bg-gradient-to-r from-primary via-blue-500 to-primary hover:shadow-[0_0_40px_rgba(14,165,233,0.4)] transition-all duration-300 inline-flex items-center gap-2 border-2 border-white/20 hover:border-white/40"
-          >
-            Join Waitlist
-            <ArrowDown className="w-4 h-4" />
-          </button>
-        </div>
-      </div>
+      {/* Hero Section with Cat Cards */}
+      <CatHeroSection scrollToWaitlist={scrollToWaitlist} />
 
       {/* Hero Section */}
       <section className="py-24 border-b border-white/5">
