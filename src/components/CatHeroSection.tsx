@@ -1,6 +1,6 @@
 
 import { FC } from "react";
-import { ArrowDown, ArrowRight, Cat } from "lucide-react";
+import { ArrowDown, ArrowRight, Cat, ChevronDown } from "lucide-react";
 import CatCard, { CatType } from "./CatCard";
 import IncidentsImageBox from "./IncidentsImageBox";
 
@@ -29,7 +29,7 @@ const CatHeroSection: FC<CatHeroSectionProps> = ({ scrollToWaitlist }) => {
         </h1>
         
         {/* 3. "Join Waitlist" button */}
-        <div className="mb-20">
+        <div className="mb-10">
           <button
             onClick={scrollToWaitlist}
             className="px-12 py-6 text-xl font-medium text-white rounded-2xl shadow-[0_0_30px_rgba(14,165,233,0.3)] bg-gradient-to-r from-primary via-blue-500 to-primary hover:shadow-[0_0_40px_rgba(14,165,233,0.4)] transition-all duration-300 inline-flex items-center gap-2 border-2 border-white/20 hover:border-white/40"
@@ -37,6 +37,16 @@ const CatHeroSection: FC<CatHeroSectionProps> = ({ scrollToWaitlist }) => {
             Join Waitlist
             <ArrowDown className="w-4 h-4" />
           </button>
+        </div>
+        
+        {/* 4. New Glowing Chevron Down */}
+        <div className="mb-20 animate-bounce">
+          <ChevronDown 
+            className="w-10 h-10 text-primary animate-pulse" 
+            style={{ 
+              filter: 'drop-shadow(0 0 8px rgba(14, 165, 233, 0.7))',
+            }} 
+          />
         </div>
       </div>
     </div>
