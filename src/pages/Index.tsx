@@ -104,42 +104,52 @@ const Index = () => {
                 catImg: catImages[0],
                 title: "Better Doability",
                 description: "Make informed decisions with rich context: frequency, resolution time, auto-resolve patterns, and historical data.",
+                borderColor: "rgba(255, 165, 0, 0.6)" // Orange for cat-decide
               },
               {
                 icon: <Brain className="w-6 h-6" />,
                 catImg: catImages[1],
                 title: "Smart Deferability",
                 description: "Never forget deferred alerts. Our system intelligently reminds you of critical items and long-ignored issues.",
+                borderColor: "rgba(147, 51, 234, 0.6)" // Purple for cat-defer
               },
               {
                 icon: <Zap className="w-6 h-6" />,
                 catImg: catImages[2],
                 title: "Better Decisioning",
                 description: "Leverage industry insights combined with your company's unique context, and past resolutions.",
+                borderColor: "rgba(236, 72, 153, 0.6)" // Pink for cat-delegate
               },
               {
                 icon: <Users className="w-6 h-6" />,
                 catImg: catImages[3],
                 title: "Seamless Delegation",
                 description: "Integrate with your incident management workflow. Get automatic reports and insights for better planning.",
+                borderColor: "rgba(14, 165, 233, 0.6)" // Blue for cat-do
               },
               {
                 icon: <Shield className="w-6 h-6" />,
                 catImg: catImages[4],
                 title: "Alert Hygiene",
                 description: "Let our system perfect your alerts. Leverage industry best practices and automated enrichment.",
+                borderColor: "rgba(34, 197, 94, 0.6)" // Green for cat-done
               },
               {
                 icon: <LineChart className="w-6 h-6" />,
                 catImg: catImages[5],
                 title: "Measurable Impact",
                 description: "Improve key metrics including MTTA, MTBI, and MDT. Focus on resolution while we handle everything else.",
+                borderColor: "rgba(14, 165, 233, 0.6)" // Blue for extra
               },
             ].map((feature, index) => (
               <div
                 key={index}
                 className="p-8 bg-secondary rounded-xl border border-white/5 hover:border-primary/30 transition-all animate-fade-up hover:shadow-lg hover:shadow-primary/5 group relative overflow-hidden"
-                style={{ animationDelay: `${index * 100}ms` }}
+                style={{ 
+                  animationDelay: `${index * 100}ms`,
+                  boxShadow: `0 0 15px ${feature.borderColor}, inset 0 0 5px ${feature.borderColor}`,
+                  borderColor: feature.borderColor
+                }}
               >
                 <div className="absolute -right-16 -bottom-16 opacity-0 group-hover:opacity-10 transition-opacity duration-500">
                   <img src={feature.catImg} alt="Feature cat" className="w-32 h-32" />
@@ -171,24 +181,31 @@ const Index = () => {
                 catImg: catImages[0],
                 title: "Improved Mean Time to Acknowledge",
                 description: "Send us your alerts and watch MTTA, MTBI, and MDT improve. Focus on alert resolution while we handle everything else.",
+                glowColor: "rgba(255, 165, 0, 0.6)" // Orange for cat-decide
               },
               {
                 metric: "MTBI",
                 catImg: catImages[4],
                 title: "Increased Mean Time Between Incidents",
                 description: "Prevent alert fatigue with intelligent grouping",
+                glowColor: "rgba(34, 197, 94, 0.6)" // Green for cat-done
               },
               {
                 metric: "MDT",
                 catImg: catImages[1],
                 title: "Reduced Mean Downtime",
                 description: "Resolve issues faster with contextual insights",
+                glowColor: "rgba(147, 51, 234, 0.6)" // Purple for cat-defer
               },
             ].map((metric, index) => (
               <div
                 key={index}
                 className="p-8 rounded-xl bg-secondary border border-white/5 text-center animate-fade-up hover:border-primary/30 transition-all group relative overflow-hidden"
-                style={{ animationDelay: `${index * 100}ms` }}
+                style={{ 
+                  animationDelay: `${index * 100}ms`,
+                  boxShadow: `0 0 20px ${metric.glowColor}, inset 0 0 8px ${metric.glowColor}`,
+                  borderColor: metric.glowColor
+                }}
               >
                 <div className="absolute -right-10 -bottom-10 opacity-0 group-hover:opacity-10 transition-opacity duration-500">
                   <img src={metric.catImg} alt="Metric cat" className="w-24 h-24" />
