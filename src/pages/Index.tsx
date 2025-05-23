@@ -99,9 +99,9 @@ const Index = () => {
                   </CarouselItem>
                 ))}
               </CarouselContent>
-              <div className="flex justify-center mt-4">
-                <CarouselPrevious className="relative static mx-2" />
-                <CarouselNext className="relative static mx-2" />
+              <div className="flex justify-center mt-6">
+                <CarouselPrevious className="relative static mx-2 h-8 w-8 bg-primary/20 hover:bg-primary/30 border-none" />
+                <CarouselNext className="relative static mx-2 h-8 w-8 bg-primary/20 hover:bg-primary/30 border-none" />
               </div>
             </Carousel>
           ) : (
