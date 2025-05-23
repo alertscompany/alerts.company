@@ -5,6 +5,7 @@ import WaitlistForm from "@/components/WaitlistForm";
 import { Link } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import CatHeroSection from "@/components/CatHeroSection";
+import CatCard, { CatType } from "@/components/CatCard";
 
 const Index = () => {
   const scrollToWaitlist = () => {
@@ -30,6 +31,14 @@ const Index = () => {
     "/lovable-uploads/6d3ce59b-51fe-4d88-979c-6d51b3adeb87.png", // Blue background cat
     "/lovable-uploads/eae2820a-a7b7-4e70-8313-59ef52deb6ce.png", // Teal background cat
   ];
+  
+  const cats: { type: CatType; imagePath: string }[] = [
+    { type: "decide", imagePath: "/lovable-uploads/c57ed06e-33f4-48f3-bc66-b411234a323f.png" },
+    { type: "do", imagePath: "/lovable-uploads/97448654-99c4-43b1-8d00-e8abf3942a2d.png" },
+    { type: "defer", imagePath: "/lovable-uploads/9dfbc446-1a59-4424-ab9c-e2985bd207dd.png" },
+    { type: "delegate", imagePath: "/lovable-uploads/9a020476-6444-4e08-9aa5-cd7012c3c5b7.png" },
+    { type: "done", imagePath: "/lovable-uploads/d558a30a-4e79-4b02-a23e-bb4d183eb0b5.png" }
+  ];
 
   return (
     <div className="min-h-screen bg-background text-foreground font-plus-jakarta">
@@ -43,10 +52,10 @@ const Index = () => {
         </div>
       </nav>
 
-      {/* Hero Section with Cat Cards */}
+      {/* Hero Section with master image, title and button */}
       <CatHeroSection scrollToWaitlist={scrollToWaitlist} />
 
-      {/* Hero Section */}
+      {/* Ditch the Noise Section */}
       <section className="py-24 border-b border-white/5 relative overflow-hidden">
         <div className="absolute -right-20 top-10 opacity-20 rotate-12">
           <img src={catImages[0]} alt="Decorative cat" className="w-40 h-40" />
@@ -61,6 +70,33 @@ const Index = () => {
                 Ditch the Noise. Fight Fatigue.<br />Focus on what's Critical.
               </h2>
             </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Cat Cards Section */}
+      <section className="py-16 border-b border-white/5 relative overflow-hidden bg-muted">
+        <div className="container mx-auto px-4">
+          <div className="flex flex-col md:flex-row items-center justify-center gap-6 max-w-6xl mx-auto">
+            {cats.map((cat, index) => (
+              <div key={cat.type} className="flex items-center">
+                <CatCard 
+                  type={cat.type}
+                  imagePath={cat.imagePath}
+                  className="w-[180px] h-[220px]"
+                />
+                {index < cats.length - 1 && (
+                  <div className="hidden md:flex items-center justify-center mx-2">
+                    <ArrowRight className="w-6 h-6 text-primary animate-pulse" />
+                  </div>
+                )}
+                {index < cats.length - 1 && (
+                  <div className="flex md:hidden items-center justify-center my-2">
+                    <ArrowDown className="w-6 h-6 text-primary animate-pulse" />
+                  </div>
+                )}
+              </div>
+            ))}
           </div>
         </div>
       </section>

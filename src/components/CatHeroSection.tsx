@@ -18,46 +18,26 @@ const CatHeroSection: FC<CatHeroSectionProps> = ({ scrollToWaitlist }) => {
   ];
 
   return (
-    <div className="relative py-24 border-b border-white/5 min-h-[80vh] flex flex-col items-center justify-center bg-gradient-to-b from-background to-muted">
-      <div className="container mx-auto px-4 pt-12">
-        {/* Add the incidents image box above the title */}
+    <div className="relative py-24 border-b border-white/5 min-h-screen flex flex-col items-center justify-center bg-gradient-to-b from-background to-muted">
+      <div className="container mx-auto px-4 pt-12 flex flex-col items-center">
+        {/* 1. The master image */}
         <IncidentsImageBox />
         
-        <h1 className="text-4xl md:text-5xl font-bold text-center mb-12 bg-gradient-to-r from-primary via-purple-500 to-primary bg-clip-text text-transparent animate-fade-up">
+        {/* 2. "The Alerts Company" header */}
+        <h1 className="text-4xl md:text-5xl font-bold text-center mb-10 bg-gradient-to-r from-primary via-purple-500 to-primary bg-clip-text text-transparent animate-fade-up">
           <Cat className="inline-block mr-2 mb-1" /> The Alerts Company <Cat className="inline-block ml-2 mb-1 transform -scale-x-100" />
         </h1>
         
-        <div className="flex flex-col md:flex-row items-center justify-center gap-4 max-w-6xl mx-auto mb-16">
-          {cats.map((cat, index) => (
-            <div key={cat.type} className="flex items-center">
-              <CatCard 
-                type={cat.type}
-                imagePath={cat.imagePath}
-                className="w-[180px] h-[220px]"
-              />
-              {index < cats.length - 1 && (
-                <div className="hidden md:flex items-center justify-center mx-2">
-                  <ArrowRight className="w-6 h-6 text-primary animate-pulse" />
-                </div>
-              )}
-              {index < cats.length - 1 && (
-                <div className="flex md:hidden items-center justify-center my-2">
-                  <ArrowDown className="w-6 h-6 text-primary animate-pulse" />
-                </div>
-              )}
-            </div>
-          ))}
+        {/* 3. "Join Waitlist" button */}
+        <div className="mb-20">
+          <button
+            onClick={scrollToWaitlist}
+            className="px-12 py-6 text-xl font-medium text-white rounded-2xl shadow-[0_0_30px_rgba(14,165,233,0.3)] bg-gradient-to-r from-primary via-blue-500 to-primary hover:shadow-[0_0_40px_rgba(14,165,233,0.4)] transition-all duration-300 inline-flex items-center gap-2 border-2 border-white/20 hover:border-white/40"
+          >
+            Join Waitlist
+            <ArrowDown className="w-4 h-4" />
+          </button>
         </div>
-      </div>
-      
-      <div className="mt-8 flex justify-center">
-        <button
-          onClick={scrollToWaitlist}
-          className="px-12 py-6 text-xl font-medium text-white rounded-2xl shadow-[0_0_30px_rgba(14,165,233,0.3)] bg-gradient-to-r from-primary via-blue-500 to-primary hover:shadow-[0_0_40px_rgba(14,165,233,0.4)] transition-all duration-300 inline-flex items-center gap-2 border-2 border-white/20 hover:border-white/40"
-        >
-          Join Waitlist
-          <ArrowDown className="w-4 h-4" />
-        </button>
       </div>
     </div>
   );
