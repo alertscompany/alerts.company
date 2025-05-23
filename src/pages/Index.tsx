@@ -9,9 +9,7 @@ import { useIsMobile } from "@/hooks/use-mobile";
 import { 
   Carousel,
   CarouselContent,
-  CarouselItem,
-  CarouselNext,
-  CarouselPrevious 
+  CarouselItem
 } from "@/components/ui/carousel";
 
 const Index = () => {
@@ -98,10 +96,6 @@ const Index = () => {
                   </CarouselItem>
                 ))}
               </CarouselContent>
-              <div className="flex justify-center mt-6">
-                <CarouselPrevious className="relative static mx-2 h-8 w-8 bg-primary/20 hover:bg-primary/30 border-none" />
-                <CarouselNext className="relative static mx-2 h-8 w-8 bg-primary/20 hover:bg-primary/30 border-none" />
-              </div>
             </Carousel>
           ) : (
             <div className="flex flex-row items-center justify-center gap-6 max-w-6xl mx-auto">

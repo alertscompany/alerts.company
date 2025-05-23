@@ -7,9 +7,7 @@ import { useIsMobile } from "@/hooks/use-mobile";
 import { 
   Carousel,
   CarouselContent,
-  CarouselItem,
-  CarouselNext,
-  CarouselPrevious 
+  CarouselItem
 } from "@/components/ui/carousel";
 
 interface CatHeroSectionProps {

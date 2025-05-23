@@ -23,7 +23,7 @@ const CatCard: FC<CatCardProps> = ({ type, imagePath, className }) => {
   return (
     <Card 
       className={cn(
-        "overflow-hidden border-4 relative rounded-xl transition-all duration-300 transform hover:scale-105", 
+        "overflow-hidden border-4 relative rounded-xl transition-all duration-300 transform hover:scale-[1.02]", 
         typeClasses[type],
         className
       )}
