@@ -1,6 +1,6 @@
 
 import { FC } from "react";
-import { ArrowDown } from "lucide-react";
+import { ArrowDown, ArrowRight } from "lucide-react";
 import CatCard, { CatType } from "./CatCard";
 
 interface CatHeroSectionProps {
@@ -23,27 +23,26 @@ const CatHeroSection: FC<CatHeroSectionProps> = ({ scrollToWaitlist }) => {
           The Alerts Company
         </h1>
         
-        <div className="grid grid-cols-1 md:grid-cols-5 gap-6 max-w-6xl mx-auto">
+        <div className="flex flex-col md:flex-row items-center justify-center gap-4 max-w-6xl mx-auto">
           {cats.map((cat, index) => (
-            <CatCard 
-              key={cat.type}
-              type={cat.type}
-              imagePath={cat.imagePath}
-              className="w-[200px] h-[240px] mx-auto"
-            />
+            <div key={cat.type} className="flex items-center">
+              <CatCard 
+                type={cat.type}
+                imagePath={cat.imagePath}
+                className="w-[180px] h-[220px]"
+              />
+              {index < cats.length - 1 && (
+                <div className="hidden md:flex items-center justify-center mx-2">
+                  <ArrowRight className="w-6 h-6 text-primary animate-pulse" />
+                </div>
+              )}
+              {index < cats.length - 1 && (
+                <div className="flex md:hidden items-center justify-center my-2">
+                  <ArrowDown className="w-6 h-6 text-primary animate-pulse" />
+                </div>
+              )}
+            </div>
           ))}
-        </div>
-        
-        <div className="flex flex-col md:flex-row items-center justify-center gap-8 mt-16 text-center text-lg md:text-xl text-white/80">
-          <div>Decide what to address</div>
-          <div>→</div>
-          <div>Do what's urgent</div>
-          <div>→</div>
-          <div>Defer what can wait</div>
-          <div>→</div>
-          <div>Delegate what others can do</div>
-          <div>→</div>
-          <div>Done with excellence</div>
         </div>
       </div>
       

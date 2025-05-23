@@ -34,18 +34,6 @@ const CatCard: FC<CatCardProps> = ({ type, imagePath, className }) => {
           alt={`${type} cat`}
           className="w-full h-full object-cover"
         />
-        <div className={cn(
-          "absolute bottom-4 left-0 right-0 text-center uppercase tracking-wider font-bold text-lg",
-          {
-            "text-orange-500": type === "decide",
-            "text-purple-500": type === "defer",
-            "text-pink-500": type === "delegate",
-            "text-blue-500": type === "do",
-            "text-green-500": type === "done",
-          }
-        )}>
-          {type}
-        </div>
       </CardContent>
     </Card>
   );
